@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expert-comptable à Meylan | Cabinet Yves &amp; Cyril Guillerme SEG</title>
+  <meta name="description" content="Cabinet d'expertise comptable à Meylan. Yves & Cyril Guillerme, depuis 1979. Comptabilité, fiscal, audit, commissariat. Meylan, Grenoble, Voiron." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ══ RESET ═══════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ══ TOKENS ══════════════════════════════════════════ */
+    :root {
+      --black:         #000000;
+      --white:         #ffffff;
+      --ink:           #191c1f;
+      --mute:          #505a63;
+      --card-dark:     #16181a;
+      --card-dark-hov: #1c1f21;
+      --navy:          #1B3D8F;
+      --on-dark-mute:  rgba(255,255,255,0.72);
+      --hairline-dark: rgba(255,255,255,0.10);
+      --hairline-dark-hov: rgba(255,255,255,0.18);
+      --hairline-light: #e2e2e7;
+      --hairline-light-hov: #c4c4cc;
+      --surface-soft:  #f4f4f4;
+      --surface-hover: #ebebeb;
+
+      /* easing */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ══ REVEAL — état initial off par défaut, JS active .js-ready ═══ */
+    /* Sans .js-ready, tout est visible (fallback no-JS ou screenshot lent) */
+    body.js-ready [data-reveal] {
+      opacity: 0;
+      transform: translateY(20px);
+      will-change: opacity, transform;
+    }
+    body.js-ready [data-reveal].revealed {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 550ms var(--ease-out), transform 600ms var(--ease-out);
+    }
+    /* Stagger via CSS custom property */
+    body.js-ready [data-reveal].revealed { transition-delay: calc(var(--delay, 0) * 1ms); }
+
+    /* prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      body.js-ready [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+
+    /* ══ NAVBAR ══════════════════════════════════════════ */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 64px;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      transition: background 350ms var(--ease-in-out),
+                  border-color 350ms var(--ease-in-out),
+                  backdrop-filter 350ms var(--ease-in-out);
+    }
+    .navbar.scrolled {
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom-color: var(--hairline-dark);
+    }
+
+    .navbar-logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 17px;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.2px;
+    }
+
+    .navbar-nav {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      list-style: none;
+    }
+    .navbar-nav a {
+      position: relative;
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--on-dark-mute);
+      text-decoration: none;
+      letter-spacing: 0.1px;
+      padding-bottom: 2px;
+      transition: color 200ms ease;
+    }
+    .navbar-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      height: 1px;
+      background: var(--white);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 250ms var(--ease-out);
+    }
+    .navbar-nav a:hover { color: var(--white); }
+    .navbar-nav a:hover::after { transform: scaleX(1); }
+
+    /* ══ BUTTONS ═════════════════════════════════════════ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      height: 40px;
+      padding: 0 20px;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      /* ripple layer */
+      isolation: isolate;
+      transition: transform 140ms var(--ease-out),
+                  background 180ms ease,
+                  color 180ms ease,
+                  opacity 180ms ease,
+                  box-shadow 180ms ease;
+    }
+    .btn:active { transform: scale(0.965); }
+
+    /* Ripple */
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.0);
+      transition: background 200ms ease;
+    }
+    .btn:active::before { background: rgba(255,255,255,0.08); }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--black);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+    }
+    .btn-white:hover {
+      background: #f0f0f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.55);
+    }
+    .btn-outline-dark:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.8);
+    }
+
+    .btn-dark {
+      background: var(--black);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .btn-dark:hover {
+      background: #111;
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .btn-lg { height: 48px; padding: 0 28px; font-size: 16px; }
+    .navbar-cta { font-size: 14px; font-weight: 600; height: 38px; padding: 0 18px; }
+
+    /* ══ LAYOUT ══════════════════════════════════════════ */
+    section { position: relative; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+    /* ══ HERO ════════════════════════════════════════════ */
+    #hero {
+      background: var(--black);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-top: 64px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: -10%;
+      background-image: url('uploads/hero-building.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      opacity: 0.18;
+      transform: scale(1.0);
+      transform-origin: center top;
+      will-change: transform;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, #000 100%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      padding: 120px 48px 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      background: var(--card-dark);
+      color: var(--on-dark-mute);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      margin-bottom: 36px;
+      border: 1px solid var(--hairline-dark);
+      letter-spacing: 0.2px;
+    }
+
+    .hero-h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(72px, 8vw, 116px);
+      font-weight: 500;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 32px;
+      font-feature-settings: 'kern' 1, 'liga' 1;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--on-dark-mute);
+      line-height: 1.56;
+      max-width: 540px;
+      margin-bottom: 44px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 80px;
+    }
+
+    .hero-divider {
+      position: relative;
+      z-index: 2;
+      border: none;
+      border-top: 1px solid var(--hairline-dark);
+      margin: 0 48px;
+    }
+
+    .hero-stats {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .stat-item {
+      padding: 44px 0 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .stat-item:not(:last-child) { border-right: 1px solid var(--hairline-dark); padding-right: 48px; }
+    .stat-item:not(:first-child) { padding-left: 48px; }
+
+    .stat-number {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(48px, 5vw, 72px);
+      font-weight: 500;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--white);
+    }
+    .stat-label {
+      font-size: 14px;
+      color: var(--on-dark-mute);
+      letter-spacing: 0.1px;
+    }
+
+    /* ══ SECTION CHIPS ═══════════════════════════════════ */
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      background: var(--surface-soft);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      margin-bottom: 24px;
+      letter-spacing: 0.2px;
+    }
+    .section-tag-dark {
+      background: var(--card-dark);
+      color: var(--on-dark-mute);
+      border: 1px solid var(--hairline-dark);
+    }
+
+    .section-h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      font-feature-settings: 'kern' 1;
+    }
+    .section-h2.on-light { color: var(--ink); }
+    .section-h2.on-dark  { color: var(--white); }
+
+    /* ══ BAND LINE ═══════════════════════════════════════ */
+    .band-line {
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        var(--hairline-dark) 20%,
+        var(--hairline-dark) 80%,
+        transparent 100%);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 700ms var(--ease-out);
+    }
+    .band-line.swept { transform: scaleX(1); }
+    @media (prefers-reduced-motion: reduce) { .band-line { transform: scaleX(1); } }
+
+    /* ══ CARD LIGHT ══════════════════════════════════════ */
+    .card-light {
+      background: var(--white);
+      border: 1px solid var(--hairline-light);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      transition:
+        border-color 200ms ease,
+        transform 220ms var(--ease-out),
+        box-shadow 220ms var(--ease-out),
+        background 200ms ease;
+      cursor: default;
+    }
+    /* Hairline accent top — reveal au hover */
+    .card-light::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--ink) 40%, var(--ink) 60%, transparent);
+      opacity: 0;
+      transform: scaleX(0.6);
+      transition: opacity 200ms ease, transform 300ms var(--ease-out);
+    }
+    .card-light:hover {
+      border-color: var(--hairline-light-hov);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+    }
+    .card-light:hover::before {
+      opacity: 0.15;
+      transform: scaleX(1);
+    }
+    .card-light:hover .card-icon { transform: scale(1.06); }
+
+    /* ══ CARD DARK ═══════════════════════════════════════ */
+    .card-dark {
+      background: var(--card-dark);
+      border: 1px solid transparent;
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      transition:
+        background 200ms ease,
+        border-color 200ms ease,
+        transform 220ms var(--ease-out);
+      cursor: default;
+    }
+    .card-dark::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--hairline-dark-hov) 30%, var(--hairline-dark-hov) 70%, transparent);
+      opacity: 0;
+      transition: opacity 200ms ease;
+    }
+    .card-dark:hover {
+      background: var(--card-dark-hov);
+      border-color: var(--hairline-dark);
+      transform: translateY(-3px);
+    }
+    .card-dark:hover::before { opacity: 1; }
+    .card-dark:hover .card-icon { transform: scale(1.06); }
+
+    /* ══ CARD FEATURED ═══════════════════════════════════ */
+    .card-featured {
+      background: var(--navy);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+      cursor: default;
+    }
+    .card-featured::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0);
+      transition: background 200ms ease;
+    }
+    .card-featured:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(27,61,143,0.30);
+    }
+    .card-featured:hover::after { background: rgba(255,255,255,0.04); }
+    .card-featured:hover .card-icon { transform: scale(1.06); }
+
+    /* ══ CARD ICON ═══════════════════════════════════════ */
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+      transition: transform 220ms var(--ease-out);
+    }
+    .card-icon.light-bg { background: var(--surface-soft); }
+    .card-icon.dark-bg  { background: rgba(255,255,255,0.10); }
+    .card-icon.navy-bg  { background: rgba(255,255,255,0.15); }
+    .card-icon svg { width: 22px; height: 22px; }
+
+    .card-title-light {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+    .card-title-dark {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+    .card-body-light { font-size: 15px; color: var(--mute); line-height: 1.55; }
+    .card-body-dark  { font-size: 15px; color: var(--on-dark-mute); line-height: 1.55; }
+
+    .card-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+
+    /* ── Mission lists ── */
+    .mission-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      margin-top: 16px;
+    }
+    .mission-list li {
+      font-size: 14px;
+      color: var(--mute);
+      line-height: 1.4;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--hairline-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .mission-list li:last-child { border-bottom: none; }
+    .mission-list li::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--ink);
+      opacity: 0.3;
+      flex-shrink: 0;
+    }
+    .mission-list-dark li {
+      color: rgba(255,255,255,0.72);
+      border-bottom-color: rgba(255,255,255,0.12);
+    }
+    .mission-list-dark li::before { background: var(--white); }
+    .chip {
+      background: var(--surface-soft);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      border: 1px solid var(--hairline-light);
+      transition: background 150ms ease, border-color 150ms ease;
+    }
+    .chip:hover { background: var(--surface-hover); border-color: var(--hairline-light-hov); }
+
+    .badge-order {
+      display: inline-flex;
+      background: rgba(255,255,255,0.15);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      margin-bottom: 16px;
+    }
+
+    /* ══ MISSIONS ════════════════════════════════════════ */
+    #missions { background: var(--white); padding: 100px 0; }
+
+    .missions-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+    .missions-header-left { flex: 1; }
+    .missions-header-right { flex: 0 0 360px; padding-top: 16px; }
+    .missions-header-right p { font-size: 16px; color: var(--mute); line-height: 1.6; }
+
+    .bento-row1 { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .bento-row2 { display: grid; grid-template-columns: 1fr 1fr 2fr; gap: 16px; }
+
+    /* ══ SECTEURS ════════════════════════════════════════ */
+    #secteurs { background: var(--black); padding: 100px 0; }
+    .secteurs-header { margin-bottom: 56px; }
+
+    .secteurs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .photo-card {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      cursor: default;
+    }
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.0);
+      transition: transform 500ms var(--ease-out);
+      will-change: transform;
+    }
+    .photo-card:hover img { transform: scale(1.04); }
+
+    .photo-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.18) 55%, transparent 100%);
+      transition: background 300ms ease;
+    }
+    .photo-card:hover .photo-card-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.22) 55%, transparent 100%);
+    }
+
+    .photo-card-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 32px;
+      transition: transform 300ms var(--ease-out);
+    }
+    .photo-card:hover .photo-card-content { transform: translateY(-4px); }
+
+    .photo-card-tag {
+      display: inline-flex;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      margin-bottom: 10px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .photo-card-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+    .photo-card-desc { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+
+    .secteurs-right { display: flex; flex-direction: column; gap: 16px; }
+    .photo-card-tall  { height: 440px; }
+    .photo-card-short { height: 210px; }
+    .secteurs-right .photo-card-short { flex: 1; min-height: 160px; height: auto; }
+
+    .card-dark-secteur {
+      background: var(--card-dark);
+      border: 1px solid transparent;
+      border-radius: 20px;
+      padding: 32px;
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      transition:
+        background 200ms ease,
+        border-color 200ms ease,
+        transform 220ms var(--ease-out);
+      cursor: default;
+    }
+    .card-dark-secteur::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--hairline-dark-hov) 30%, var(--hairline-dark-hov) 70%, transparent);
+      opacity: 0;
+      transition: opacity 200ms ease;
+    }
+    .card-dark-secteur:hover {
+      background: var(--card-dark-hov);
+      border-color: var(--hairline-dark);
+      transform: translateY(-3px);
+    }
+    .card-dark-secteur:hover::before { opacity: 1; }
+    .card-dark-secteur:hover .card-icon { transform: scale(1.06); }
+
+    /* ══ CABINET ═════════════════════════════════════════ */
+    #cabinet { background: var(--white); padding: 100px 0; }
+
+    .cabinet-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .cabinet-h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+    .cabinet-body {
+      font-size: 16px;
+      color: var(--mute);
+      line-height: 1.65;
+      margin-bottom: 40px;
+    }
+    .cabinet-right { display: flex; flex-direction: column; gap: 16px; }
+
+    /* ── Person card ── */
+    .person-card {
+      background: var(--white);
+      border: 1px solid var(--hairline-light);
+      border-radius: 20px;
+      padding: 24px 28px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
+      transition:
+        border-color 200ms ease,
+        transform 220ms var(--ease-out),
+        box-shadow 220ms var(--ease-out);
+      cursor: default;
+    }
+    .person-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--navy) 30%, var(--navy) 70%, transparent);
+      opacity: 0;
+      transform: scaleX(0.5);
+      transition: opacity 200ms ease, transform 300ms var(--ease-out);
+    }
+    .person-card:hover {
+      border-color: var(--hairline-light-hov);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+    .person-card:hover::before { opacity: 0.5; transform: scaleX(1); }
+    .person-card:hover .person-initials {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(27,61,143,0.28);
+    }
+
+    .person-initials {
+      width: 48px; height: 48px;
+      border-radius: 9999px;
+      background: var(--navy);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      flex-shrink: 0;
+      letter-spacing: 0.5px;
+      transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+    }
+
+    .person-info { flex: 1; }
+    .person-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 3px;
+      letter-spacing: -0.2px;
+    }
+    .person-title { font-size: 13px; color: var(--mute); margin-bottom: 10px; }
+    .person-desc  { font-size: 14px; color: var(--mute); line-height: 1.55; }
+
+    .office-photo { height: 180px; border-radius: 20px; overflow: hidden; }
+    .office-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 500ms var(--ease-out);
+    }
+    .office-photo:hover img { transform: scale(1.03); }
+
+    /* ══ CONTACT ═════════════════════════════════════════ */
+    #contact { background: var(--black); padding: 100px 0; }
+
+    .contact-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+      gap: 48px;
+    }
+    .contact-header-left { flex: 1; }
+    .contact-header-right { flex-shrink: 0; }
+    .contact-subtitle {
+      font-size: 17px;
+      color: var(--on-dark-mute);
+      line-height: 1.55;
+      margin-top: 16px;
+      max-width: 480px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .contact-card {
+      background: var(--card-dark);
+      border: 1px solid transparent;
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      transition:
+        background 200ms ease,
+        border-color 200ms ease,
+        transform 220ms var(--ease-out);
+      cursor: default;
+    }
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2) 30%, rgba(255,255,255,0.2) 70%, transparent);
+      opacity: 0;
+      transition: opacity 200ms ease;
+    }
+    .contact-card:hover {
+      background: var(--card-dark-hov);
+      border-color: var(--hairline-dark);
+      transform: translateY(-3px);
+    }
+    .contact-card:hover::before { opacity: 1; }
+    .contact-card:hover .contact-city { color: var(--white); }
+    .contact-card:hover .contact-info-icon { background: rgba(255,255,255,0.11); }
+
+    .contact-city {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 16px;
+      letter-spacing: -0.3px;
+      transition: color 200ms ease;
+    }
+    .contact-info-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+    .contact-info-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      transition: background 200ms ease;
+    }
+    .contact-info-icon svg { width: 14px; height: 14px; opacity: 0.7; }
+    .contact-info-text { font-size: 14px; color: var(--on-dark-mute); line-height: 1.5; }
+
+    .contact-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+      margin-top: 20px;
+      text-decoration: none;
+      letter-spacing: 0.2px;
+      transition: opacity 150ms ease;
+    }
+    .contact-phone:hover { opacity: 0.7; }
+
+    /* ══ FOOTER ══════════════════════════════════════════ */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--hairline-dark);
+      padding: 80px 48px 48px;
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 64px;
+    }
+    .footer-logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .footer-tagline { font-size: 13px; color: var(--on-dark-mute); line-height: 1.5; }
+    .footer-col-title { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 16px; letter-spacing: 0.2px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--on-dark-mute);
+      text-decoration: none;
+      transition: color 180ms ease;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid var(--hairline-dark);
+      padding-top: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-legal { font-size: 12px; color: rgba(255,255,255,0.32); line-height: 1.5; }
+
+    /* ══ RESPONSIVE ══════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .navbar { padding: 0 24px; }
+      .navbar-nav { display: none; }
+      .container { padding: 0 24px; }
+      .hero-inner { padding: 80px 24px 0; }
+      .hero-divider { margin: 0 24px; }
+      .hero-stats { padding: 0 24px; }
+      .secteurs-grid { grid-template-columns: 1fr; }
+      .photo-card-tall { height: 340px; }
+      .cabinet-grid { grid-template-columns: 1fr; gap: 48px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .missions-header { flex-direction: column; }
+      .missions-header-right { flex: none; }
+      .bento-row1 { grid-template-columns: 1fr; }
+      .bento-row2 { grid-template-columns: 1fr 1fr; }
+      footer { padding: 60px 24px 40px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      /* Nouvelles sections */
+      #evaluation .container > div,
+      #facture-electronique .container > div,
+      #creation .container > div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+      #creation .container > div[style*="grid-template-columns:1fr 1fr 1fr"] { grid-template-columns: 1fr 1fr !important; }
+      #recrutement .container > div { flex-direction: column; align-items: flex-start !important; }
+    }
+    @media (max-width: 768px) {
+      .hero-h1 { font-size: 56px; }
+      .stat-number { font-size: 44px; }
+      .contact-header { flex-direction: column; align-items: flex-start; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .bento-row2 { grid-template-columns: 1fr; }
+      .hero-stats { display: flex; flex-direction: column; }
+      .stat-item:not(:last-child) { border-right: none; border-bottom: 1px solid var(--hairline-dark); padding-right: 0; }
+      .stat-item:not(:first-child) { padding-left: 0; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <a href="#" class="navbar-logo">Cabinet Yves &amp; Cyril Guillerme</a>
+    <ul class="navbar-nav">
+      <li><a href="#cabinet">Le cabinet</a></li>
+      <li><a href="#missions">Nos missions</a></li>
+      <li><a href="#secteurs">Secteurs</a></li>
+      <li><a href="#evaluation">Évaluation</a></li>
+      <li><a href="#creation">Création</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="tel:+33476902010" class="btn btn-white navbar-cta">04 76 90 20 10</a>
+  </nav>
+
+  <!-- ══ HERO ════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-inner">
+      <div id="h-tag" class="tag-pill">Expert-comptable &amp; Commissariat aux comptes · Depuis 1979</div>
+      <h1 class="hero-h1">
+        <span id="h-line1" style="display:block">Expertise comptable</span>
+        <span id="h-line2" style="display:block">Conseil permanent</span>
+      </h1>
+      <p id="h-sub" class="hero-sub">Comptabilité fiable, conformité fiscale, conseil stratégique. Le cabinet Yves &amp; Cyril Guillerme accompagne les PME, artisans et professions libérales de la région grenobloise depuis 1979.</p>
+      <div id="h-ctas" class="hero-ctas">
+        <a href="tel:+33476902010" class="btn btn-white btn-lg">Nous appeler</a>
+        <a href="#missions" class="btn btn-outline-dark btn-lg">Nos missions</a>
+      </div>
+    </div>
+    <hr class="hero-divider" />
+    <div class="hero-stats">
+      <div class="stat-item" id="stat-0">
+        <span class="stat-number" data-count="1979" data-display="1979">1979</span>
+        <span class="stat-label">Année de création</span>
+      </div>
+      <div class="stat-item" id="stat-1">
+        <span class="stat-number" data-count="3" data-display="3 agences">3 agences</span>
+        <span class="stat-label">Meylan · Grenoble · Voiron</span>
+      </div>
+      <div class="stat-item" id="stat-2">
+        <span class="stat-number" data-count="20" data-display="20">20</span>
+        <span class="stat-label">Collaborateurs</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="band-line" data-bandline></div>
+
+  <!-- ══ MISSIONS ════════════════════════════════════════ -->
+  <section id="missions">
+    <div class="container">
+
+      <div class="missions-header" data-reveal>
+        <div class="missions-header-left">
+          <div class="section-tag">Nos missions</div>
+          <h2 class="section-h2 on-light">Votre conseil permanent</h2>
+        </div>
+        <div class="missions-header-right">
+          <p>Du suivi comptable quotidien à l'audit légal, nous couvrons l'intégralité des obligations fiscales et sociales de votre entreprise avec un interlocuteur dédié.</p>
+        </div>
+      </div>
+
+      <!-- Grille 3 colonnes, 2 lignes -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+
+        <!-- Comptabilité -->
+        <div class="card-light" data-reveal style="--delay:0">
+          <div class="card-icon light-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#191c1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="9" x2="9" y2="21"/>
+            </svg>
+          </div>
+          <div class="card-title-light">Comptabilité</div>
+          <ul class="mission-list">
+            <li>Tenue et révision des comptes</li>
+            <li>Clôtures annuelles et bilans</li>
+            <li>Liasses fiscales</li>
+            <li>Budgets prévisionnels</li>
+            <li>Comptabilité analytique</li>
+          </ul>
+        </div>
+
+        <!-- Droit fiscal & social -->
+        <div class="card-light" data-reveal style="--delay:80">
+          <div class="card-icon light-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#191c1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="card-title-light">Droit fiscal et social</div>
+          <ul class="mission-list">
+            <li>Déclarations fiscales</li>
+            <li>Optimisation de la gestion fiscale</li>
+            <li>Assistance en cas de contrôle</li>
+            <li>Bulletins de paie et déclarations sociales</li>
+            <li>Gestion du personnel</li>
+          </ul>
+        </div>
+
+        <!-- Obligations légales -->
+        <div class="card-light" data-reveal style="--delay:160">
+          <div class="card-icon light-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#191c1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+          </div>
+          <div class="card-title-light">Obligations légales</div>
+          <ul class="mission-list">
+            <li>Secrétariat juridique</li>
+            <li>Dépôt des comptes</li>
+            <li>Assemblées générales</li>
+            <li>Apports, fusions, transformations</li>
+            <li>Formalités greffe</li>
+          </ul>
+        </div>
+
+        <!-- Gestion & Conseil -->
+        <div class="card-light" data-reveal style="--delay:0">
+          <div class="card-icon light-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#191c1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <div class="card-title-light">Gestion et conseil</div>
+          <ul class="mission-list">
+            <li>Accompagnement à la création</li>
+            <li>Tableaux de bord et budgets</li>
+            <li>Gestion de trésorerie</li>
+            <li>Recherche de financements</li>
+            <li>Conseil aux entreprises en difficulté</li>
+          </ul>
+        </div>
+
+        <!-- Audit -->
+        <div class="card-light" data-reveal style="--delay:80">
+          <div class="card-icon light-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#191c1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+          <div class="card-title-light">Audit</div>
+          <ul class="mission-list">
+            <li>Audit lors de prise de participation</li>
+            <li>Rachat d'entreprise</li>
+            <li>Audit juridique et fiscal</li>
+            <li>Audit social et d'organisation</li>
+            <li>Évaluation d'entreprise</li>
+          </ul>
+        </div>
+
+        <!-- Commissariat aux comptes -->
+        <div class="card-featured" data-reveal style="--delay:160">
+          <div class="badge-order">Inscrit à l'Ordre</div>
+          <div class="card-icon navy-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+            </svg>
+          </div>
+          <div class="card-title-dark">Commissariat aux comptes</div>
+          <ul class="mission-list mission-list-dark">
+            <li>Certification des états financiers</li>
+            <li>Examen des documents prévisionnels</li>
+            <li>Missions lors de la vie juridique</li>
+            <li>Indépendance garantie, inscrits CNCC</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="band-line" data-bandline></div>
+
+  <!-- ══ SECTEURS ════════════════════════════════════════ -->
+  <section id="secteurs">
+    <div class="container">
+      <div class="secteurs-header" data-reveal>
+        <div class="section-tag section-tag-dark">Secteurs d'activité</div>
+        <h2 class="section-h2 on-dark">Une expertise sectorielle rare</h2>
+      </div>
+      <div class="secteurs-grid">
+        <div class="photo-card photo-card-tall" data-reveal style="--delay:80">
+          <img src="uploads/secteur-immobilier.jpg" alt="Immobilier" loading="lazy" />
+          <div class="photo-card-overlay"></div>
+          <div class="photo-card-content">
+            <div class="photo-card-tag">Immobilier &amp; SCCV</div>
+            <div class="photo-card-title">Promoteurs &amp; marchands de biens</div>
+            <div class="photo-card-desc">Spécialisés dans l'accompagnement des créateurs de SCCV, de la constitution des statuts à la liquidation. Marchands de biens, lotisseurs, LMP/LMNP et agents immobiliers.</div>
+          </div>
+        </div>
+        <div class="secteurs-right">
+          <div class="photo-card photo-card-short" data-reveal style="--delay:160">
+            <img src="uploads/secteur-boulangeries.jpg" alt="Boulangeries" loading="lazy" />
+            <div class="photo-card-overlay"></div>
+            <div class="photo-card-content">
+              <div class="photo-card-tag">Boulangeries</div>
+              <div class="photo-card-title">~50 dossiers en Auvergne-Rhône-Alpes</div>
+              <div class="photo-card-desc">Tableaux de bord métier construits sur notre expérience terrain pour accompagner le chef d'entreprise au quotidien.</div>
+            </div>
+          </div>
+          <div class="photo-card photo-card-short" data-reveal style="--delay:240; flex:1">
+            <img src="uploads/michael-myers-60ywI1Bx1M0-unsplash.jpg" alt="Activités pétrolières" loading="lazy" />
+            <div class="photo-card-overlay"></div>
+            <div class="photo-card-content">
+              <div class="photo-card-tag">Énergie</div>
+              <div class="photo-card-title">Activités pétrolières</div>
+              <div class="photo-card-desc">Yves Guillerme a audité deux acteurs majeurs du secteur pendant 30 ans. Cyril Guillerme a rédigé son mémoire sur les stocks stratégiques et les spécificités des entrepositaires agréés.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="band-line" data-bandline></div>
+
+  <!-- ══ CABINET ═════════════════════════════════════════ -->
+  <section id="cabinet">
+    <div class="container">
+      <div class="cabinet-grid">
+        <div data-reveal>
+          <div class="section-tag">Le cabinet</div>
+          <h2 class="cabinet-h2">Un cabinet familial<br>depuis 1979</h2>
+          <p class="cabinet-body">Fondé par Yves Guillerme en 1979 à Meylan, le cabinet a grandi avec ses clients. Aujourd'hui dirigé avec Cyril Guillerme, il rassemble 20 collaborateurs répartis sur 3 agences et accompagne les PME, TPE, artisans et professions libérales de toute la région grenobloise dans la durée.</p>
+          <a href="#contact" class="btn btn-dark btn-lg">Nous contacter</a>
+        </div>
+        <div class="cabinet-right" data-reveal style="--delay:120">
+          <div class="person-card">
+            <div class="person-initials">YG</div>
+            <div class="person-info">
+              <div class="person-name">Yves Guillerme</div>
+              <div class="person-title">Expert-comptable · Commissaire aux comptes</div>
+              <div class="person-desc">Fondateur du cabinet en 1979. Plus de 45 ans d'expérience au service des entreprises de la région grenobloise.</div>
+            </div>
+          </div>
+          <div class="person-card">
+            <div class="person-initials">CG</div>
+            <div class="person-info">
+              <div class="person-name">Cyril Guillerme</div>
+              <div class="person-title">Expert-comptable · Commissaire aux comptes</div>
+              <div class="person-desc">Expert-comptable et commissaire aux comptes inscrit. Spécialisé en immobilier, transmission et accompagnement des PME en croissance.</div>
+            </div>
+          </div>
+          <div class="office-photo">
+            <img src="uploads/cabinet-bureau.jpg" alt="Bureau du cabinet" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="band-line" data-bandline></div>
+
+  <!-- ══ ÉVALUATION D'ENTREPRISE ════════════════════════ -->
+  <section id="evaluation" style="background:var(--white);padding:100px 0">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
+        <div data-reveal>
+          <div class="section-tag">Évaluation d'entreprise</div>
+          <h2 class="section-h2 on-light">Connaître<br>la valeur de<br>votre entreprise</h2>
+          <p style="font-size:16px;color:var(--mute);line-height:1.65;margin-top:24px">Cette mission détermine la valeur de votre entreprise à partir de données financières historiques et prévisionnelles, pour proposer une base rationnelle de négociation et évaluer la surenchère qu'un acquéreur est prêt à payer.</p>
+          <a href="#contact" class="btn btn-dark btn-lg" style="margin-top:36px">Nous consulter</a>
+        </div>
+        <div data-reveal style="--delay:120">
+          <div style="margin-bottom:20px">
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:16px">Pour quelles raisons ?</div>
+            <div style="display:flex;flex-direction:column">
+              <div style="padding:14px 0;border-bottom:1px solid var(--hairline-light);font-size:15px;color:var(--ink)">Clôture des comptes annuels</div>
+              <div style="padding:14px 0;border-bottom:1px solid var(--hairline-light);font-size:15px;color:var(--ink)">Cession, pour le vendeur</div>
+              <div style="padding:14px 0;border-bottom:1px solid var(--hairline-light);font-size:15px;color:var(--ink)">Acquisition, pour l'acheteur</div>
+              <div style="padding:14px 0;border-bottom:1px solid var(--hairline-light);font-size:15px;color:var(--ink)">Apport d'une entreprise individuelle à une société</div>
+              <div style="padding:14px 0;font-size:15px;color:var(--ink)">À titre indicatif, pour le dirigeant</div>
+            </div>
+          </div>
+          <div style="background:var(--surface-soft);border-radius:20px;padding:28px">
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:16px">Notre méthode</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--mute)"><span style="width:22px;height:22px;border-radius:50%;background:var(--ink);color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;line-height:1">1</span>Diagnostic industriel, humain, juridique, fiscal &amp; social</div>
+              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--mute)"><span style="width:22px;height:22px;border-radius:50%;background:var(--ink);color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;line-height:1">2</span>Audit comptable et financier approfondi</div>
+              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--mute)"><span style="width:22px;height:22px;border-radius:50%;background:var(--ink);color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;line-height:1">3</span>Analyse du prévisionnel</div>
+              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--mute)"><span style="width:22px;height:22px;border-radius:50%;background:var(--ink);color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;line-height:1">4</span>Rapport d'évaluation &amp; assistance lors des négociations</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="band-line" data-bandline></div>
+
+  <!-- ══ FACTURE ÉLECTRONIQUE ════════════════════════════ -->
+  <section id="facture-electronique" style="background:var(--black);padding:100px 0">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+        <div data-reveal>
+          <div class="section-tag section-tag-dark">Facture électronique</div>
+          <h2 class="section-h2 on-dark">Anticipez la<br>transition numérique</h2>
+          <p style="font-size:16px;color:var(--on-dark-mute);line-height:1.65;margin-top:24px;margin-bottom:16px">Les obligations réglementaires imposent la mise en place progressive de la facturation électronique. Il est primordial d'anticiper, d'analyser votre situation et d'identifier les solutions numériques adaptées sans précipitation.</p>
+          <p style="font-size:16px;color:var(--on-dark-mute);line-height:1.65;margin-bottom:36px">Nous vous accompagnons en sécurisant la démarche de mise en œuvre pour accélérer votre transition numérique.</p>
+          <a href="#contact" class="btn btn-white btn-lg">Nous contacter</a>
+        </div>
+        <div data-reveal style="--delay:120;display:flex;flex-direction:column;gap:16px">
+          <div class="card-dark">
+            <div class="card-icon dark-bg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div class="card-title-dark" style="font-size:17px">Analyse de votre situation</div>
+            <div class="card-body-dark">Évaluation de vos processus actuels de facturation et identification des outils numériques les plus adaptés à votre entreprise.</div>
+          </div>
+          <div class="card-dark">
+            <div class="card-icon dark-bg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="card-title-dark" style="font-size:17px">Mise en œuvre sécurisée</div>
+            <div class="card-body-dark">Accompagnement pas à pas pour sécuriser la démarche et accélérer votre transition numérique sans risque de rupture.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="band-line" data-bandline></div>
+
+  <!-- ══ CRÉATION D'ENTREPRISE ══════════════════════════ -->
+  <section id="creation" style="background:var(--black);padding:100px 0;position:relative;overflow:hidden">
+    <!-- Photo de fond -->
+    <div style="position:absolute;inset:0;background-image:url('uploads/creation-bg.jpg');background-size:cover;background-position:center 40%;opacity:0.28;transform:scale(1.05)"></div>
+    <!-- Gradient de renforcement -->
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.55) 100%)"></div>
+    <div class="container" style="position:relative;z-index:2">
+      <div style="max-width:680px;margin:0 auto 56px;text-align:center" data-reveal>
+        <div class="section-tag section-tag-dark" style="display:inline-flex">Création d'entreprise</div>
+        <h2 class="section-h2 on-dark" style="margin-top:0">Lancez-vous avec<br>le bon partenaire</h2>
+        <p style="font-size:17px;color:var(--on-dark-mute);line-height:1.6;margin-top:20px">BNC, BIC, SARL ? Déclaration 2035, TVA ou franchise, IS, CFE ? La création d'une société soulève de nombreuses questions. Le cabinet SEG vous accompagne dans toutes vos démarches pour simplifier vos premiers pas en tant que chef d'entreprise.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+        <div class="card-dark" data-reveal style="--delay:80">
+          <div class="card-icon dark-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="card-title-dark">Choix du statut</div>
+          <div class="card-body-dark">BNC, BIC, SARL, SAS, entreprise individuelle, nous vous guidons vers la structure la plus adaptée à votre activité et votre situation personnelle.</div>
+        </div>
+        <div class="card-dark" data-reveal style="--delay:160">
+          <div class="card-icon dark-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="card-title-dark">Obligations fiscales</div>
+          <div class="card-body-dark">TVA, franchise en base, IS, CFE, déclaration 2035, maîtrisez vos obligations dès le départ pour éviter les mauvaises surprises.</div>
+        </div>
+        <div class="card-dark" data-reveal style="--delay:240">
+          <div class="card-icon dark-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="card-title-dark">Accompagnement continu</div>
+          <div class="card-body-dark">Un interlocuteur dédié de la création à la croissance, comptabilité, gestion, droit des affaires et conseil stratégique au quotidien.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="band-line" data-bandline></div>
+
+  <!-- ══ RECRUTEMENT ════════════════════════════════════ -->
+  <section id="recrutement" style="position:relative;overflow:hidden;min-height:560px;display:flex;align-items:center">
+    <!-- Photo de fond -->
+    <div style="position:absolute;inset:0;background-image:url('uploads/recrutement-bg.jpg');background-size:cover;background-position:center 30%;opacity:0.32"></div>
+    <!-- Overlay sombre directionnel -->
+    <div style="position:absolute;inset:0;background:linear-gradient(105deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.30) 100%)"></div>
+
+    <div class="container" style="position:relative;z-index:2;padding-top:100px;padding-bottom:100px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+
+        <!-- Colonne texte -->
+        <div data-reveal>
+          <div class="section-tag section-tag-dark">Rejoignez-nous</div>
+          <h2 class="section-h2 on-dark" style="font-size:clamp(32px,3.5vw,48px);margin-bottom:20px">Nous recrutons à Meylan,<br>Grenoble et Voiron</h2>
+          <p style="font-size:16px;color:var(--on-dark-mute);line-height:1.65;max-width:420px">Vous souhaitez rejoindre un cabinet à taille humaine, avec une expertise sectorielle forte ? Déposez votre candidature pour un stage ou un emploi.</p>
+          <a href="mailto:contact@cabinet-guillerme.fr?subject=Candidature" class="btn btn-white btn-lg" style="margin-top:36px">Déposer ma candidature</a>
+        </div>
+
+        <!-- Colonne panneaux -->
+        <div data-reveal style="--delay:150;display:flex;flex-direction:column;gap:12px">
+          <div style="background:rgba(255,255,255,0.07);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:24px 28px">
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px">Stage &amp; alternance</div>
+            <div style="font-size:14px;color:var(--on-dark-mute);line-height:1.5">Missions encadrées, immersion terrain, encadrement par des associés expérimentés.</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.07);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:24px 28px">
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px">Emploi CDI</div>
+            <div style="font-size:14px;color:var(--on-dark-mute);line-height:1.5">Collaborateur comptable, gestionnaire de paie, auditeur. Postes ouverts à Meylan, Grenoble et Voiron.</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.07);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:24px 28px">
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px">Cabinet à taille humaine</div>
+            <div style="font-size:14px;color:var(--on-dark-mute);line-height:1.5">20 collaborateurs, 3 agences, une expertise sectorielle rare et un environnement de travail exigeant.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="band-line" data-bandline></div>
+
+  <!-- ══ CONTACT ═════════════════════════════════════════ -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-header">
+        <div class="contact-header-left" data-reveal>
+          <div class="section-tag section-tag-dark">Nos agences</div>
+          <h2 class="section-h2 on-dark">3 agences, pour plus<br>de proximité</h2>
+          <p class="contact-subtitle">Implantés à Meylan, Grenoble et Voiron, nous sommes proches de vous pour un accompagnement concret et réactif.</p>
+        </div>
+        <div class="contact-header-right" data-reveal style="--delay:120">
+          <a href="mailto:contact@cabinet-guillerme.fr" class="btn btn-outline-dark btn-lg">Nous écrire</a>
+        </div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card" data-reveal style="--delay:80">
+          <div class="contact-city">Meylan</div>
+          <div class="contact-info-row">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="contact-info-text">3 allée des Centaurées<br>38240 Meylan</div>
+          </div>
+          <a href="tel:+33476902010" class="contact-phone">04 76 90 20 10</a>
+        </div>
+        <div class="contact-card" data-reveal style="--delay:160">
+          <div class="contact-city">Grenoble</div>
+          <div class="contact-info-row">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="contact-info-text">27 rue du Docteur Mazet<br>38000 Grenoble</div>
+          </div>
+          <a href="tel:+33476902010" class="contact-phone">04 76 90 20 10</a>
+        </div>
+        <div class="contact-card" data-reveal style="--delay:240">
+          <div class="contact-city">Voiron</div>
+          <div class="contact-info-row">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="contact-info-text">44 avenue Jean-Jaurès<br>38500 Voiron</div>
+          </div>
+          <a href="tel:+33476661069" class="contact-phone">04 76 66 10 69</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo">Cabinet Yves &amp; Cyril Guillerme</div>
+          <div class="footer-tagline">Expert-comptable &amp; Commissaires aux comptes<br>Meylan · Grenoble · Voiron · Depuis 1979</div>
+        </div>
+        <div>
+          <div class="footer-col-title">Navigation</div>
+          <ul class="footer-links">
+            <li><a href="#cabinet">Le cabinet</a></li>
+            <li><a href="#missions">Nos missions</a></li>
+            <li><a href="#secteurs">Secteurs</a></li>
+            <li><a href="#evaluation">Évaluation</a></li>
+            <li><a href="#facture-electronique">Facture électronique</a></li>
+            <li><a href="#creation">Création d'entreprise</a></li>
+            <li><a href="#recrutement">Recrutement</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Agences</div>
+          <ul class="footer-links">
+            <li><a href="#contact">Meylan</a></li>
+            <li><a href="#contact">Grenoble</a></li>
+            <li><a href="#contact">Voiron</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="tel:+33476902010">04 76 90 20 10</a></li>
+            <li><a href="mailto:contact@cabinet-guillerme.fr">Nous écrire</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-legal">
+          SIRET 315 280 297 00021 · APE 6920Z · Expert-comptable inscrit à l'Ordre<br>
+          © 2026 Cabinet Yves &amp; Cyril Guillerme SEG. Tous droits réservés. · Mentions légales · Politique de confidentialité
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── Helpers ─────────────────────────────────────────── */
+    function qs(sel) { return document.querySelector(sel); }
+    function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
+    function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
+
+    /* ── Reduced motion check ────────────────────────────── */
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ── Hero elements — hide before JS adds class ───────── */
+    var heroEls = [
+      { el: qs('#h-tag'),   ty: 16, delay: 80  },
+      { el: qs('#h-line1'), ty: 24, delay: 200 },
+      { el: qs('#h-line2'), ty: 24, delay: 320 },
+      { el: qs('#h-sub'),   ty: 16, delay: 460 },
+      { el: qs('#h-ctas'),  ty: 12, delay: 580 }
+    ];
+
+    if (!reduced) {
+      heroEls.forEach(function(item) {
+        if (item.el) {
+          item.el.style.opacity = '0';
+          item.el.style.transform = 'translateY(' + item.ty + 'px)';
+        }
+      });
+      /* Stats */
+      [0,1,2].forEach(function(i) {
+        var el = qs('#stat-' + i);
+        if (el) { el.style.opacity = '0'; el.style.transform = 'translateY(16px)'; }
+      });
+    }
+
+    /* ── Activate CSS reveal system ──────────────────────── */
+    if (!reduced) document.body.classList.add('js-ready');
+
+    /* ── Reveal [data-reveal] elements ──────────────────── */
+    var revealEls = Array.from(document.querySelectorAll('[data-reveal]'));
+
+    function revealEl(el) {
+      if (el._rev) return;
+      el._rev = true;
+      /* delay from CSS custom property, default 0 */
+      var d = parseInt(el.style.getPropertyValue('--delay') || '0', 10) || 0;
+      if (reduced) { d = 0; }
+      setTimeout(function() { el.classList.add('revealed'); }, d);
+    }
+
+    function scanReveal() {
+      var vh = window.innerHeight || 600;
+      revealEls.forEach(function(el) {
+        if (el._rev) return;
+        var r = el.getBoundingClientRect();
+        if (r.top < vh + 80) revealEl(el);
+      });
+    }
+
+    /* IO */
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) revealEl(e.target); });
+      }, { rootMargin: '0px 0px 80px 0px', threshold: 0 });
+      revealEls.forEach(function(el) { io.observe(el); });
+    }
+
+    /* ── Band lines ──────────────────────────────────────── */
+    var bandLines = Array.from(document.querySelectorAll('[data-bandline]'));
+    if ('IntersectionObserver' in window) {
+      var lineIO = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('swept'); });
+      }, { threshold: 0.4 });
+      bandLines.forEach(function(l) { lineIO.observe(l); });
+    }
+
+    /* ── rAF engine: nav + parallax ─────────────────────── */
+    var navbar  = qs('#navbar');
+    var heroBg  = qs('#hero-bg');
+    var ticking = false;
+
+    function getScrollY() { return window.scrollY || document.documentElement.scrollTop || 0; }
+
+    function frame() {
+      var sy = getScrollY();
+
+      /* Nav */
+      if (sy > 20) { navbar.classList.add('scrolled'); }
+      else         { navbar.classList.remove('scrolled'); }
+
+      /* Parallax */
+      if (heroBg && !reduced) {
+        heroBg.style.transform = 'translateY(' + (sy * 0.25) + 'px)';
+      }
+
+      /* Scan reveal (belt-and-suspenders) */
+      scanReveal();
+
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) { requestAnimationFrame(frame); ticking = true; }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    document.addEventListener('scroll', onScroll, { passive: true });
+    requestAnimationFrame(frame);
+
+    /* ── Hero entrance sequence ──────────────────────────── */
+    function animIn(el, delay, dur) {
+      if (!el || reduced) {
+        if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
+        return;
+      }
+      setTimeout(function() {
+        el.style.transition = 'opacity ' + dur + 'ms cubic-bezier(0.22,1,0.36,1), transform ' + dur + 'ms cubic-bezier(0.22,1,0.36,1)';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, delay);
+    }
+
+    heroEls.forEach(function(item) { animIn(item.el, item.delay, 600); });
+
+    /* ── Stats entrance + counter ────────────────────────── */
+    var countDone = false;
+    function animateCounters() {
+      if (countDone) return;
+      countDone = true;
+      var els = document.querySelectorAll('[data-count]');
+      var t0 = performance.now();
+      function tick(now) {
+        var p = easeOutExpo(clamp((now - t0) / 1400, 0, 1));
+        els.forEach(function(el) {
+          var target = parseInt(el.dataset.count, 10);
+          el.textContent = p >= 1 ? el.dataset.display : Math.round(p * target);
+        });
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    setTimeout(function() {
+      [0,1,2].forEach(function(i) {
+        var el = qs('#stat-' + i);
+        if (!el) return;
+        setTimeout(function() {
+          if (reduced) { el.style.opacity = '1'; el.style.transform = 'none'; return; }
+          el.style.transition = 'opacity 500ms cubic-bezier(0.22,1,0.36,1), transform 500ms cubic-bezier(0.22,1,0.36,1)';
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, i * 100);
+      });
+      animateCounters();
+    }, 820);
+
+    /* Initial scan */
+    setTimeout(scanReveal, 100);
+    setTimeout(scanReveal, 500);
+
+  })();
+  </script>
+</body>
+</html>
