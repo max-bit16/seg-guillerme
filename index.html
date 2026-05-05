@@ -8,7 +8,7 @@
   <link rel="preload" as="image" href="uploads/hero-building.jpg" fetchpriority="high" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
   <style>
     /* ══ RESET ═══════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,6 +32,13 @@
       --surface-hover-btn: #f0f0f0;
       --ink-hover:     #111111;
 
+      /* overlays */
+      --overlay-dark-sm: rgba(0, 0, 0, 0.45);
+      --overlay-dark-md: rgba(0, 0, 0, 0.65);
+      --overlay-dark-lg: rgba(0, 0, 0, 0.85);
+      --text-ghost:      rgba(255, 255, 255, 0.40);
+      --surface-elevated: #1a1d20;
+
       /* easing */
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
@@ -40,7 +47,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'DM Sans', sans-serif;
       background: var(--black);
       color: var(--white);
       -webkit-font-smoothing: antialiased;
@@ -133,7 +140,7 @@
       align-items: center;
       justify-content: center;
       border-radius: 9999px;
-      font-family: 'Inter', sans-serif;
+      font-family: 'DM Sans', sans-serif;
       font-size: 15px;
       font-weight: 600;
       height: 40px;
@@ -196,7 +203,7 @@
     }
 
     .btn-lg { height: 48px; padding: 0 28px; font-size: 16px; }
-    .navbar-cta { font-size: 14px; font-weight: 600; min-height: 40px; padding: 10px 22px; }
+    .navbar-cta { font-size: 14px; font-weight: 600; min-height: 44px; padding: 10px 22px; }
 
     /* ══ LAYOUT ══════════════════════════════════════════ */
     section { position: relative; }
@@ -222,13 +229,12 @@
       opacity: 0.18;
       transform: scale(1.0);
       transform-origin: center top;
-      will-change: transform;
     }
     .hero-bg::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, transparent 40%, #000 100%);
+      background: linear-gradient(to bottom, transparent 40%, var(--black) 100%);
     }
 
     .hero-inner {
@@ -288,37 +294,27 @@
       margin: 0 48px;
     }
 
-    .hero-stats {
+    .hero-proof {
       position: relative;
       z-index: 2;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 48px;
-    }
-
-    .stat-item {
-      padding: 44px 0 60px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .stat-item:not(:last-child) { border-right: 1px solid var(--hairline-dark); padding-right: 48px; }
-    .stat-item:not(:first-child) { padding-left: 48px; }
-
-    .stat-number {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(48px, 5vw, 72px);
-      font-weight: 500;
-      line-height: 1.0;
-      letter-spacing: -0.03em;
-      color: var(--white);
-    }
-    .stat-label {
+      padding: 32px 48px 60px;
+      border-top: 1px solid var(--hairline-dark);
       font-size: 14px;
       color: var(--on-dark-mute);
-      letter-spacing: 0.1px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .hero-proof strong { color: var(--white); font-weight: 600; }
+    .proof-sep { color: var(--hairline-dark-hov); user-select: none; }
+    @media (max-width: 600px) {
+      .hero-proof { font-size: 12px; gap: 10px; padding: 24px 24px 48px; }
+      .proof-sep { display: none; }
+      .proof-item { width: 100%; }
     }
 
     /* ══ SECTION CHIPS ═══════════════════════════════════ */
@@ -599,7 +595,7 @@
     .photo-card-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.18) 55%, transparent 100%);
+      background: linear-gradient(to top, var(--overlay-dark-lg) 0%, rgba(0,0,0,0.18) 55%, transparent 100%);
       transition: background 300ms ease;
     }
     .photo-card:hover .photo-card-overlay {
@@ -909,7 +905,7 @@
       flex-wrap: wrap;
       gap: 16px;
     }
-    .footer-legal { font-size: 12px; color: rgba(255,255,255,0.32); line-height: 1.5; }
+    .footer-legal { font-size: 12px; color: rgba(255,255,255,0.60); line-height: 1.5; }
 
     /* ══ RESPONSIVE ══════════════════════════════════════ */
 
@@ -1022,7 +1018,7 @@
       .container { padding: 0 24px; }
       .hero-inner { padding: 80px 24px 0; }
       .hero-divider { margin: 0 24px; }
-      .hero-stats { padding: 0 24px; }
+      .hero-proof { padding: 24px 24px 48px; }
       .secteurs-grid { grid-template-columns: 1fr; }
       .photo-card-tall { height: 340px; }
       .cabinet-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -1118,7 +1114,7 @@
     </div>
   </section>
 
-  <div class="band-line" data-bandline></div>
+  <div class="band-line" data-bandline aria-hidden="true"></div>
 
   <!-- ══ MISSIONS ════════════════════════════════════════ -->
   <section id="missions">
@@ -1243,7 +1239,7 @@
     </div>
   </section>
 
-  <div class="band-line" data-bandline></div>
+  <div class="band-line" data-bandline aria-hidden="true"></div>
 
   <!-- ══ SECTEURS ════════════════════════════════════════ -->
   <section id="secteurs">
@@ -1254,7 +1250,7 @@
       </div>
       <div class="secteurs-grid">
         <div class="photo-card photo-card-tall" data-reveal style="--delay:80">
-          <img src="uploads/secteur-immobilier.jpg" alt="Immobilier" loading="lazy" />
+          <img src="uploads/secteur-immobilier.jpg" alt="Immobilier" loading="lazy" width="900" height="600" />
           <div class="photo-card-overlay"></div>
           <div class="photo-card-content">
             <div class="photo-card-tag">Immobilier &amp; SCCV</div>
@@ -1264,7 +1260,7 @@
         </div>
         <div class="secteurs-right">
           <div class="photo-card photo-card-short" data-reveal style="--delay:160">
-            <img src="uploads/secteur-boulangeries.jpg" alt="Boulangeries" loading="lazy" />
+            <img src="uploads/secteur-boulangeries.jpg" alt="Boulangeries" loading="lazy" width="900" height="600" />
             <div class="photo-card-overlay"></div>
             <div class="photo-card-content">
               <div class="photo-card-tag">Boulangeries</div>
@@ -1273,7 +1269,7 @@
             </div>
           </div>
           <div class="photo-card photo-card-short" data-reveal style="--delay:240; flex:1">
-            <img src="uploads/michael-myers-60ywI1Bx1M0-unsplash.jpg" alt="Activités pétrolières" loading="lazy" />
+            <img src="uploads/michael-myers-60ywI1Bx1M0-unsplash.jpg" alt="Activités pétrolières" loading="lazy" width="900" height="600" />
             <div class="photo-card-overlay"></div>
             <div class="photo-card-content">
               <div class="photo-card-tag">Énergie</div>
@@ -1286,7 +1282,7 @@
     </div>
   </section>
 
-  <div class="band-line" data-bandline></div>
+  <div class="band-line" data-bandline aria-hidden="true"></div>
 
   <!-- ══ CABINET ═════════════════════════════════════════ -->
   <section id="cabinet">
@@ -1316,14 +1312,14 @@
             </div>
           </div>
           <div class="office-photo">
-            <img src="uploads/cabinet-bureau.jpg" alt="Bureau du cabinet" loading="lazy" />
+            <img src="uploads/cabinet-bureau.jpg" alt="Bureau du cabinet" loading="lazy" width="900" height="600" />
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="band-line" data-bandline></div>
+  <div class="band-line" data-bandline aria-hidden="true"></div>
 
   <!-- ══ ÉVALUATION D'ENTREPRISE ════════════════════════ -->
   <section id="evaluation" style="background:var(--white);padding:100px 0">
@@ -1360,7 +1356,7 @@
     </div>
   </section>
 
-  <div class="band-line" data-bandline></div>
+  <div class="band-line" data-bandline aria-hidden="true"></div>
 
   <!-- ══ FACTURE ÉLECTRONIQUE ════════════════════════════ -->
   <section id="facture-electronique" style="background:var(--black);padding:100px 0">
@@ -1393,14 +1389,14 @@
     </div>
   </section>
 
-  <div class="band-line" data-bandline></div>
+  <div class="band-line" data-bandline aria-hidden="true"></div>
 
   <!-- ══ CRÉATION D'ENTREPRISE ══════════════════════════ -->
   <section id="creation" style="background:var(--black);padding:100px 0;position:relative;overflow:hidden">
     <!-- Photo de fond -->
     <div style="position:absolute;inset:0;background-image:url('uploads/creation-bg.jpg');background-size:cover;background-position:center 40%;opacity:0.28;transform:scale(1.05)"></div>
     <!-- Gradient de renforcement -->
-    <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.55) 100%)"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom, var(--overlay-dark-sm) 0%, rgba(0,0,0,0.1) 40%, var(--overlay-dark-md) 100%)"></div>
     <div class="container" style="position:relative;z-index:2">
       <div style="max-width:680px;margin:0 auto 56px;text-align:center" data-reveal>
         <div class="section-tag section-tag-dark" style="display:inline-flex">Création d'entreprise</div>
@@ -1433,14 +1429,14 @@
     </div>
   </section>
 
-  <div class="band-line" data-bandline></div>
+  <div class="band-line" data-bandline aria-hidden="true"></div>
 
   <!-- ══ RECRUTEMENT ════════════════════════════════════ -->
   <section id="recrutement" style="position:relative;overflow:hidden;min-height:560px;display:flex;align-items:center">
     <!-- Photo de fond -->
     <div style="position:absolute;inset:0;background-image:url('uploads/recrutement-bg.jpg');background-size:cover;background-position:center 30%;opacity:0.32"></div>
     <!-- Overlay sombre directionnel -->
-    <div style="position:absolute;inset:0;background:linear-gradient(105deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.30) 100%)"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(105deg, var(--overlay-dark-lg) 0%, var(--overlay-dark-md) 50%, rgba(0,0,0,0.30) 100%)"></div>
 
     <div class="container" style="position:relative;z-index:2;padding-top:100px;padding-bottom:100px">
       <div class="grid-2col" style="align-items:center">
@@ -1455,15 +1451,15 @@
 
         <!-- Colonne panneaux -->
         <div data-reveal style="--delay:150;display:flex;flex-direction:column;gap:12px">
-          <div style="background:rgba(255,255,255,0.07);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:24px 28px">
+          <div style="background:var(--surface-elevated);border:1px solid var(--hairline-dark);border-radius:16px;padding:24px 28px">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px">Stage &amp; alternance</div>
             <div style="font-size:14px;color:var(--on-dark-mute);line-height:1.5">Missions encadrées, immersion terrain, encadrement par des associés expérimentés.</div>
           </div>
-          <div style="background:rgba(255,255,255,0.07);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:24px 28px">
+          <div style="background:var(--surface-elevated);border:1px solid var(--hairline-dark);border-radius:16px;padding:24px 28px">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px">Emploi CDI</div>
             <div style="font-size:14px;color:var(--on-dark-mute);line-height:1.5">Collaborateur comptable, gestionnaire de paie, auditeur. Postes ouverts à Meylan, Grenoble et Voiron.</div>
           </div>
-          <div style="background:rgba(255,255,255,0.07);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:24px 28px">
+          <div style="background:var(--surface-elevated);border:1px solid var(--hairline-dark);border-radius:16px;padding:24px 28px">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px">Cabinet à taille humaine</div>
             <div style="font-size:14px;color:var(--on-dark-mute);line-height:1.5">20 collaborateurs, 3 agences, une expertise sectorielle rare et un environnement de travail exigeant.</div>
           </div>
@@ -1473,7 +1469,7 @@
     </div>
   </section>
 
-  <div class="band-line" data-bandline></div>
+  <div class="band-line" data-bandline aria-hidden="true"></div>
 
   <!-- ══ CONTACT ═════════════════════════════════════════ -->
   <section id="contact">
@@ -1611,6 +1607,7 @@
 
     /* ── Reveal [data-reveal] elements ──────────────────── */
     var revealEls = Array.from(document.querySelectorAll('[data-reveal]'));
+    var allRevealed = false;
 
     function revealEl(el) {
       if (el._rev) return;
@@ -1653,6 +1650,7 @@
     /* ── rAF engine: nav + parallax ─────────────────────── */
     var navbar  = qs('#navbar');
     var heroBg  = qs('#hero-bg');
+    var heroSection = qs('#hero');
     var ticking = false;
 
     function getScrollY() { return window.scrollY || document.documentElement.scrollTop || 0; }
@@ -1664,13 +1662,22 @@
       if (sy > 20) { navbar.classList.add('scrolled'); }
       else         { navbar.classList.remove('scrolled'); }
 
-      /* Parallax */
+      /* Parallax — will-change activé seulement quand hero visible */
       if (heroBg && !reduced) {
-        heroBg.style.transform = 'translateY(' + (sy * 0.25) + 'px)';
+        var heroH = heroSection ? heroSection.offsetHeight : window.innerHeight;
+        if (sy < heroH) {
+          if (heroBg.style.willChange !== 'transform') heroBg.style.willChange = 'transform';
+          heroBg.style.transform = 'translateY(' + (sy * 0.25) + 'px)';
+        } else {
+          if (heroBg.style.willChange !== 'auto') heroBg.style.willChange = 'auto';
+        }
       }
 
       /* Scan reveal (belt-and-suspenders) */
-      scanReveal();
+      if (!allRevealed) {
+        scanReveal();
+        if (revealEls.every(function(el) { return el._rev; })) allRevealed = true;
+      }
 
       ticking = false;
     }
