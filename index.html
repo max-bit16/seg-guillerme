@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Expert-comptable à Meylan | Cabinet Yves &amp; Cyril Guillerme SEG</title>
   <meta name="description" content="Cabinet d'expertise comptable à Meylan. Yves & Cyril Guillerme, depuis 1979. Comptabilité, fiscal, audit, commissariat. Meylan, Grenoble, Voiron." />
+  <link rel="preload" as="image" href="uploads/hero-building.jpg" fetchpriority="high" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -28,6 +29,8 @@
       --hairline-light-hov: #c4c4cc;
       --surface-soft:  #f4f4f4;
       --surface-hover: #ebebeb;
+      --surface-hover-btn: #f0f0f0;
+      --ink-hover:     #111111;
 
       /* easing */
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -49,7 +52,6 @@
     body.js-ready [data-reveal] {
       opacity: 0;
       transform: translateY(20px);
-      will-change: opacity, transform;
     }
     body.js-ready [data-reveal].revealed {
       opacity: 1;
@@ -135,6 +137,7 @@
       font-size: 15px;
       font-weight: 600;
       height: 40px;
+      min-height: 44px;
       padding: 0 20px;
       cursor: pointer;
       text-decoration: none;
@@ -168,7 +171,7 @@
       box-shadow: 0 1px 2px rgba(0,0,0,0.12);
     }
     .btn-white:hover {
-      background: #f0f0f0;
+      background: var(--surface-hover-btn);
       box-shadow: 0 2px 8px rgba(0,0,0,0.18);
     }
 
@@ -188,12 +191,12 @@
       border: 1px solid rgba(255,255,255,0.12);
     }
     .btn-dark:hover {
-      background: #111;
+      background: var(--ink-hover);
       border-color: rgba(255,255,255,0.22);
     }
 
     .btn-lg { height: 48px; padding: 0 28px; font-size: 16px; }
-    .navbar-cta { font-size: 14px; font-weight: 600; height: 38px; padding: 0 18px; }
+    .navbar-cta { font-size: 14px; font-weight: 600; min-height: 40px; padding: 10px 22px; }
 
     /* ══ LAYOUT ══════════════════════════════════════════ */
     section { position: relative; }
@@ -909,9 +912,113 @@
     .footer-legal { font-size: 12px; color: rgba(255,255,255,0.32); line-height: 1.5; }
 
     /* ══ RESPONSIVE ══════════════════════════════════════ */
+
+    /* ══ SKIP LINK ══════════════════════════════════════════ */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      background: var(--white);
+      color: var(--black);
+      padding: 8px 20px;
+      border-radius: 0 0 8px 8px;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 999;
+      text-decoration: none;
+      transition: top 150ms;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ══ HAMBURGER ══════════════════════════════════════════ */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      margin-left: 16px;
+      min-width: 44px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+    .ham-bar {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      transition: transform 250ms cubic-bezier(0.16,1,0.3,1), opacity 200ms;
+    }
+    .hamburger[aria-expanded="true"] .ham-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger[aria-expanded="true"] .ham-bar:nth-child(2) { opacity: 0; }
+    .hamburger[aria-expanded="true"] .ham-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ══ MOBILE MENU ═════════════════════════════════════════ */
+    #mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      padding: 80px 40px 48px;
+      border-right: 1px solid var(--hairline-dark);
+    }
+    #mobile-menu[hidden] { display: none; }
+    #mobile-menu > nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    #mobile-menu > nav a {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(28px, 7vw, 40px);
+      font-weight: 500;
+      color: var(--on-dark-mute);
+      text-decoration: none;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--hairline-dark);
+      letter-spacing: -0.02em;
+      transition: color 150ms;
+    }
+    #mobile-menu > nav a:hover { color: var(--white); }
+    .mobile-menu-close {
+      position: absolute;
+      top: 20px; right: 24px;
+      background: none;
+      border: none;
+      color: var(--on-dark-mute);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 8px;
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ══ GRILLES CSS ═════════════════════════════════════════ */
+    .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+    .grid-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+    /* ══ FOCUS VISIBLE ══════════════════════════════════════ */
+    :focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+    .btn:focus-visible { outline: 2px solid var(--navy); outline-offset: 4px; }
+    .navbar-nav a:focus-visible,
+    .navbar-logo:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; border-radius: 4px; }
+
+    /* ══ CARD ICON COLOR ════════════════════════════════════ */
+    .card-light .card-icon { color: var(--ink); }
+    .card-light svg { color: var(--ink); }
+
     @media (max-width: 1024px) {
       .navbar { padding: 0 24px; }
       .navbar-nav { display: none; }
+      .hamburger { display: flex; }
       .container { padding: 0 24px; }
       .hero-inner { padding: 80px 24px 0; }
       .hero-divider { margin: 0 24px; }
@@ -926,12 +1033,8 @@
       .bento-row2 { grid-template-columns: 1fr 1fr; }
       footer { padding: 60px 24px 40px; }
       .footer-top { grid-template-columns: 1fr 1fr; }
-      /* Nouvelles sections */
-      #evaluation .container > div,
-      #facture-electronique .container > div,
-      #creation .container > div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
-      #creation .container > div[style*="grid-template-columns:1fr 1fr 1fr"] { grid-template-columns: 1fr 1fr !important; }
-      #recrutement .container > div { flex-direction: column; align-items: flex-start !important; }
+      .grid-2col, .grid-3col { grid-template-columns: 1fr !important; gap: 32px !important; }
+      #recrutement .container > div { grid-template-columns: 1fr !important; }
     }
     @media (max-width: 768px) {
       .hero-h1 { font-size: 56px; }
@@ -948,6 +1051,8 @@
 </head>
 <body>
 
+  <a href="#hero" class="skip-link">Aller au contenu principal</a>
+
   <!-- ══ NAVBAR ══════════════════════════════════════════ -->
   <nav class="navbar" id="navbar">
     <a href="#" class="navbar-logo">Cabinet Yves &amp; Cyril Guillerme</a>
@@ -960,7 +1065,26 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="tel:+33476902010" class="btn btn-white navbar-cta">04 76 90 20 10</a>
+    <button class="hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
+    </button>
+    <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu de navigation" hidden>
+      <button class="mobile-menu-close" aria-label="Fermer le menu">✕</button>
+      <nav>
+        <a href="#missions">Nos missions</a>
+        <a href="#secteurs">Secteurs</a>
+        <a href="#cabinet">Le cabinet</a>
+        <a href="#evaluation">Évaluation</a>
+        <a href="#creation">Création</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a href="tel:+33476902010" class="btn btn-white" style="margin-top:32px">04 76 90 20 10</a>
+    </div>
   </nav>
+
+  <main>
 
   <!-- ══ HERO ════════════════════════════════════════════ -->
   <section id="hero">
@@ -1011,12 +1135,12 @@
       </div>
 
       <!-- Grille 3 colonnes, 2 lignes -->
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+      <div class="grid-3col">
 
         <!-- Comptabilité -->
         <div class="card-light" data-reveal style="--delay:0">
           <div class="card-icon light-bg">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#191c1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="9" x2="9" y2="21"/>
             </svg>
           </div>
@@ -1033,7 +1157,7 @@
         <!-- Droit fiscal & social -->
         <div class="card-light" data-reveal style="--delay:80">
           <div class="card-icon light-bg">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#191c1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             </svg>
           </div>
@@ -1050,7 +1174,7 @@
         <!-- Obligations légales -->
         <div class="card-light" data-reveal style="--delay:160">
           <div class="card-icon light-bg">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#191c1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
             </svg>
           </div>
@@ -1067,7 +1191,7 @@
         <!-- Gestion & Conseil -->
         <div class="card-light" data-reveal style="--delay:0">
           <div class="card-icon light-bg">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#191c1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
             </svg>
           </div>
@@ -1084,7 +1208,7 @@
         <!-- Audit -->
         <div class="card-light" data-reveal style="--delay:80">
           <div class="card-icon light-bg">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#191c1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
           </div>
@@ -1102,7 +1226,7 @@
         <div class="card-featured" data-reveal style="--delay:160">
           <div class="badge-order">Inscrit à l'Ordre</div>
           <div class="card-icon navy-bg">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
             </svg>
           </div>
@@ -1204,7 +1328,7 @@
   <!-- ══ ÉVALUATION D'ENTREPRISE ════════════════════════ -->
   <section id="evaluation" style="background:var(--white);padding:100px 0">
     <div class="container">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
+      <div class="grid-2col" style="align-items:start">
         <div data-reveal>
           <div class="section-tag">Évaluation d'entreprise</div>
           <h2 class="section-h2 on-light">Connaître<br>la valeur de<br>votre entreprise</h2>
@@ -1225,10 +1349,10 @@
           <div style="background:var(--surface-soft);border-radius:20px;padding:28px">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:16px">Notre méthode</div>
             <div style="display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--mute)"><span style="width:22px;height:22px;border-radius:50%;background:var(--ink);color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;line-height:1">1</span>Diagnostic industriel, humain, juridique, fiscal &amp; social</div>
-              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--mute)"><span style="width:22px;height:22px;border-radius:50%;background:var(--ink);color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;line-height:1">2</span>Audit comptable et financier approfondi</div>
-              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--mute)"><span style="width:22px;height:22px;border-radius:50%;background:var(--ink);color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;line-height:1">3</span>Analyse du prévisionnel</div>
-              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--mute)"><span style="width:22px;height:22px;border-radius:50%;background:var(--ink);color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;line-height:1">4</span>Rapport d'évaluation &amp; assistance lors des négociations</div>
+              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--mute)"><span style="width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;line-height:1">1</span>Diagnostic industriel, humain, juridique, fiscal &amp; social</div>
+              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--mute)"><span style="width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;line-height:1">2</span>Audit comptable et financier approfondi</div>
+              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--mute)"><span style="width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;line-height:1">3</span>Analyse du prévisionnel</div>
+              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--mute)"><span style="width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;line-height:1">4</span>Rapport d'évaluation &amp; assistance lors des négociations</div>
             </div>
           </div>
         </div>
@@ -1241,7 +1365,7 @@
   <!-- ══ FACTURE ÉLECTRONIQUE ════════════════════════════ -->
   <section id="facture-electronique" style="background:var(--black);padding:100px 0">
     <div class="container">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+      <div class="grid-2col" style="align-items:center">
         <div data-reveal>
           <div class="section-tag section-tag-dark">Facture électronique</div>
           <h2 class="section-h2 on-dark">Anticipez la<br>transition numérique</h2>
@@ -1252,14 +1376,14 @@
         <div data-reveal style="--delay:120;display:flex;flex-direction:column;gap:16px">
           <div class="card-dark">
             <div class="card-icon dark-bg">
-              <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
             </div>
             <div class="card-title-dark" style="font-size:17px">Analyse de votre situation</div>
             <div class="card-body-dark">Évaluation de vos processus actuels de facturation et identification des outils numériques les plus adaptés à votre entreprise.</div>
           </div>
           <div class="card-dark">
             <div class="card-icon dark-bg">
-              <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
             <div class="card-title-dark" style="font-size:17px">Mise en œuvre sécurisée</div>
             <div class="card-body-dark">Accompagnement pas à pas pour sécuriser la démarche et accélérer votre transition numérique sans risque de rupture.</div>
@@ -1283,24 +1407,24 @@
         <h2 class="section-h2 on-dark" style="margin-top:0">Lancez-vous avec<br>le bon partenaire</h2>
         <p style="font-size:17px;color:var(--on-dark-mute);line-height:1.6;margin-top:20px">BNC, BIC, SARL ? Déclaration 2035, TVA ou franchise, IS, CFE ? La création d'une société soulève de nombreuses questions. Le cabinet SEG vous accompagne dans toutes vos démarches pour simplifier vos premiers pas en tant que chef d'entreprise.</p>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+      <div class="grid-3col">
         <div class="card-dark" data-reveal style="--delay:80">
           <div class="card-icon dark-bg">
-            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           </div>
           <div class="card-title-dark">Choix du statut</div>
           <div class="card-body-dark">BNC, BIC, SARL, SAS, entreprise individuelle, nous vous guidons vers la structure la plus adaptée à votre activité et votre situation personnelle.</div>
         </div>
         <div class="card-dark" data-reveal style="--delay:160">
           <div class="card-icon dark-bg">
-            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
           <div class="card-title-dark">Obligations fiscales</div>
           <div class="card-body-dark">TVA, franchise en base, IS, CFE, déclaration 2035, maîtrisez vos obligations dès le départ pour éviter les mauvaises surprises.</div>
         </div>
         <div class="card-dark" data-reveal style="--delay:240">
           <div class="card-icon dark-bg">
-            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
           <div class="card-title-dark">Accompagnement continu</div>
           <div class="card-body-dark">Un interlocuteur dédié de la création à la croissance, comptabilité, gestion, droit des affaires et conseil stratégique au quotidien.</div>
@@ -1319,7 +1443,7 @@
     <div style="position:absolute;inset:0;background:linear-gradient(105deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.30) 100%)"></div>
 
     <div class="container" style="position:relative;z-index:2;padding-top:100px;padding-bottom:100px">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+      <div class="grid-2col" style="align-items:center">
 
         <!-- Colonne texte -->
         <div data-reveal>
@@ -1369,7 +1493,7 @@
           <div class="contact-city">Meylan</div>
           <div class="contact-info-row">
             <div class="contact-info-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div class="contact-info-text">3 allée des Centaurées<br>38240 Meylan</div>
           </div>
@@ -1379,7 +1503,7 @@
           <div class="contact-city">Grenoble</div>
           <div class="contact-info-row">
             <div class="contact-info-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div class="contact-info-text">27 rue du Docteur Mazet<br>38000 Grenoble</div>
           </div>
@@ -1389,7 +1513,7 @@
           <div class="contact-city">Voiron</div>
           <div class="contact-info-row">
             <div class="contact-info-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div class="contact-info-text">44 avenue Jean-Jaurès<br>38500 Voiron</div>
           </div>
@@ -1398,6 +1522,8 @@
       </div>
     </div>
   </section>
+
+  </main><!-- /main -->
 
   <!-- ══ FOOTER ══════════════════════════════════════════ -->
   <footer>
@@ -1489,10 +1615,13 @@
     function revealEl(el) {
       if (el._rev) return;
       el._rev = true;
-      /* delay from CSS custom property, default 0 */
       var d = parseInt(el.style.getPropertyValue('--delay') || '0', 10) || 0;
       if (reduced) { d = 0; }
-      setTimeout(function() { el.classList.add('revealed'); }, d);
+      if (!reduced) el.style.willChange = 'transform, opacity';
+      setTimeout(function() {
+        el.classList.add('revealed');
+        setTimeout(function() { el.style.willChange = 'auto'; }, 700);
+      }, d);
     }
 
     function scanReveal() {
@@ -1605,6 +1734,37 @@
     setTimeout(scanReveal, 100);
     setTimeout(scanReveal, 500);
 
+  })();
+  </script>
+
+  <script>
+  (function () {
+    var hamburger  = document.querySelector('.hamburger');
+    var mobileMenu = document.getElementById('mobile-menu');
+    var mobileClose = document.querySelector('.mobile-menu-close');
+    if (!hamburger || !mobileMenu) return;
+
+    function openMenu() {
+      mobileMenu.removeAttribute('hidden');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      mobileClose.focus();
+    }
+    function closeMenu() {
+      mobileMenu.setAttribute('hidden', '');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      hamburger.focus();
+    }
+
+    hamburger.addEventListener('click', openMenu);
+    mobileClose.addEventListener('click', closeMenu);
+    mobileMenu.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', closeMenu);
+    });
+    mobileMenu.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeMenu();
+    });
   })();
   </script>
 </body>
