@@ -213,6 +213,7 @@
 
     /* ══ HERO ════════════════════════════════════════════ */
     #hero {
+      position: relative;
       background: var(--black);
       min-height: 100vh;
       display: flex;
@@ -641,14 +642,12 @@
     }
     .photo-card img {
       width: 100%;
-      height: 100%;
+      height: 115%;
+      margin-top: -7.5%;
       object-fit: cover;
       display: block;
-      transform: scale(1.0);
-      transition: transform 500ms var(--ease-out);
       will-change: transform;
     }
-    .photo-card:hover img { transform: scale(1.04); }
 
     .photo-card-overlay {
       position: absolute;
@@ -1103,6 +1102,37 @@
       .stat-item:not(:first-child) { padding-left: 0; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ── Custom cursor ────────────────────────────────────── */
+    .cursor-dot,
+    .cursor-ring {
+      position: fixed;
+      top: 0; left: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .cursor-dot {
+      width: 8px; height: 8px;
+      background: var(--white);
+      mix-blend-mode: difference;
+      transition: transform 120ms cubic-bezier(0.22,1,0.36,1), opacity 200ms;
+    }
+    .cursor-ring {
+      width: 40px; height: 40px;
+      border: 1.5px solid var(--white);
+      mix-blend-mode: difference;
+      opacity: 0.55;
+      transition: width 350ms cubic-bezier(0.22,1,0.36,1), height 350ms cubic-bezier(0.22,1,0.36,1), opacity 200ms;
+    }
+    body:not(.has-cursor) .cursor-dot,
+    body:not(.has-cursor) .cursor-ring { display: none; }
+    body.cursor-hover .cursor-ring { width: 64px; height: 64px; opacity: 0.3; }
+    body.cursor-active .cursor-dot { transform: scale(0.5); }
+
+    /* ── Split-text hero words ────────────────────────────── */
+    .h-word { display: inline-block; }
+
   </style>
 </head>
 <body>
@@ -1145,11 +1175,12 @@
   <!-- ══ HERO ════════════════════════════════════════════ -->
   <section id="hero">
     <div class="hero-bg" id="hero-bg" aria-hidden="true"></div>
+    <canvas id="hero-canvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;"></canvas>
     <div class="hero-inner">
       <div id="h-tag" class="tag-pill">Expert-comptable &amp; Commissariat aux comptes · Depuis 1979</div>
       <h1 class="hero-h1">
-        <span id="h-line1" style="display:block">Expertise comptable</span>
-        <span id="h-line2" style="display:block">Conseil permanent</span>
+        <span id="h-line1" style="display:block"><span class="h-word">Expertise</span> <span class="h-word">comptable</span></span>
+        <span id="h-line2" style="display:block"><span class="h-word">Conseil</span> <span class="h-word">permanent</span></span>
       </h1>
       <p id="h-sub" class="hero-sub">Comptabilité fiable, conformité fiscale, conseil stratégique. Le cabinet Yves &amp; Cyril Guillerme accompagne les PME, artisans et professions libérales de la région grenobloise depuis 1979.</p>
       <div id="h-ctas" class="hero-ctas">
@@ -1642,8 +1673,6 @@
     /* ── Hero elements — hide before JS adds class ───────── */
     var heroEls = [
       { el: qs('#h-tag'),   ty: 16, delay: 80  },
-      { el: qs('#h-line1'), ty: 24, delay: 200 },
-      { el: qs('#h-line2'), ty: 24, delay: 320 },
       { el: qs('#h-sub'),   ty: 16, delay: 460 },
       { el: qs('#h-ctas'),  ty: 12, delay: 580 }
     ];
@@ -1843,6 +1872,9 @@
   })();
   </script>
 
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
   <!-- ══ GSAP + ScrollTrigger ════════════════════════════ -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
@@ -1931,6 +1963,143 @@
 
     /* ── Refresh after assets load ─────────────────────────── */
     window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+
+  })();
+  </script>
+
+  <!-- ══ Overdrive: Cursor · Split-Text · Bokeh · Parallax ══ -->
+  <script>
+  (function () {
+    'use strict';
+    if (typeof gsap === 'undefined') return;
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ── A: Custom cursor ──────────────────────────────────── */
+    var dot  = document.getElementById('cursor-dot');
+    var ring = document.getElementById('cursor-ring');
+    if (dot && ring && !('ontouchstart' in window)) {
+      document.body.classList.add('has-cursor');
+      var mx = window.innerWidth / 2, my = window.innerHeight / 2;
+      var rx = mx, ry = my;
+
+      document.addEventListener('mousemove', function (e) {
+        mx = e.clientX; my = e.clientY;
+        dot.style.transform = 'translate(' + (mx - 4) + 'px,' + (my - 4) + 'px)';
+      });
+
+      (function lerpRing() {
+        rx += (mx - rx) * 0.13;
+        ry += (my - ry) * 0.13;
+        ring.style.transform = 'translate(' + (rx - 20) + 'px,' + (ry - 20) + 'px)';
+        requestAnimationFrame(lerpRing);
+      })();
+
+      document.querySelectorAll('a, button, [role="button"]').forEach(function (el) {
+        el.addEventListener('mouseenter', function () { document.body.classList.add('cursor-hover'); });
+        el.addEventListener('mouseleave', function () { document.body.classList.remove('cursor-hover'); });
+      });
+      document.addEventListener('mousedown', function () { document.body.classList.add('cursor-active'); });
+      document.addEventListener('mouseup',   function () { document.body.classList.remove('cursor-active'); });
+    }
+
+    /* ── A: Split-text H1 word stagger ────────────────────── */
+    if (!reduced) {
+      var words = document.querySelectorAll('.h-word');
+      if (words.length) {
+        gsap.set(words, { opacity: 0, y: 30 });
+        setTimeout(function () {
+          gsap.to(words, {
+            opacity: 1, y: 0,
+            duration: 0.75, ease: 'power3.out',
+            stagger: { amount: 0.42, from: 'start' }
+          });
+        }, 160);
+      }
+    }
+
+    /* ── A: Magnetic CTA buttons ───────────────────────────── */
+    document.querySelectorAll('.btn-white, .btn-outline-dark, .btn-dark, .nav-cta').forEach(function (btn) {
+      btn.addEventListener('mousemove', function (e) {
+        var r = btn.getBoundingClientRect();
+        var dx = e.clientX - (r.left + r.width  / 2);
+        var dy = e.clientY - (r.top  + r.height / 2);
+        gsap.to(btn, { x: dx * 0.28, y: dy * 0.28, duration: 0.35, ease: 'power2.out', overwrite: 'auto' });
+      });
+      btn.addEventListener('mouseleave', function () {
+        gsap.to(btn, { x: 0, y: 0, duration: 0.55, ease: 'power3.out', overwrite: 'auto' });
+      });
+    });
+
+    /* ── C: Ambient bokeh canvas ───────────────────────────── */
+    var canvas = document.getElementById('hero-canvas');
+    if (canvas && !reduced) {
+      var ctx = canvas.getContext('2d');
+      var orbs = [];
+
+      function resizeCanvas() {
+        canvas.width  = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas, { passive: true });
+
+      for (var i = 0; i < 5; i++) {
+        orbs.push({
+          x:  Math.random() * canvas.width,
+          y:  Math.random() * canvas.height,
+          r:  80 + Math.random() * 140,
+          vx: (Math.random() - 0.5) * 0.07,
+          vy: (Math.random() - 0.5) * 0.07,
+          op: 0.022 + Math.random() * 0.016,
+          hue: Math.random() > 0.5 ? 220 : 240
+        });
+      }
+
+      (function drawOrbs() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        orbs.forEach(function (o) {
+          o.x += o.vx; o.y += o.vy;
+          if (o.x < -o.r) o.x = canvas.width + o.r;
+          if (o.x > canvas.width + o.r) o.x = -o.r;
+          if (o.y < -o.r) o.y = canvas.height + o.r;
+          if (o.y > canvas.height + o.r) o.y = -o.r;
+          var g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
+          g.addColorStop(0, 'hsla(' + o.hue + ',55%,72%,' + o.op + ')');
+          g.addColorStop(1, 'hsla(' + o.hue + ',55%,72%,0)');
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        requestAnimationFrame(drawOrbs);
+      })();
+    }
+
+    /* ── C: Photo-card scroll parallax + hover scale ──────── */
+    if (!reduced) {
+      document.querySelectorAll('.photo-card img').forEach(function (img) {
+        var card = img.closest('.photo-card');
+        gsap.fromTo(img,
+          { y: '-7%' },
+          {
+            y: '7%',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 2
+            }
+          }
+        );
+        card.addEventListener('mouseenter', function () {
+          gsap.to(img, { scale: 1.06, duration: 0.55, ease: 'power3.out', overwrite: 'auto' });
+        });
+        card.addEventListener('mouseleave', function () {
+          gsap.to(img, { scale: 1.0, duration: 0.72, ease: 'power3.out', overwrite: 'auto' });
+        });
+      });
+    }
 
   })();
   </script>
