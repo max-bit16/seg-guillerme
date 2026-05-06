@@ -23,6 +23,8 @@
       --card-dark-hov: #1c1f21;
       --navy:          #1B3D8F;
       --on-dark-mute:  rgba(255,255,255,0.72);
+      --on-dark-strong: rgba(255,255,255,0.88);
+      --on-dark-legal:  rgba(255,255,255,0.60);
       --hairline-dark: rgba(255,255,255,0.10);
       --hairline-dark-hov: rgba(255,255,255,0.18);
       --hairline-light: #e2e2e7;
@@ -227,7 +229,6 @@
       background-size: cover;
       background-position: center 30%;
       opacity: 0.18;
-      transform: scale(1.0);
       transform-origin: center top;
     }
     .hero-bg::after {
@@ -311,6 +312,39 @@
     }
     .hero-proof strong { color: var(--white); font-weight: 600; }
     .proof-sep { color: var(--hairline-dark-hov); user-select: none; }
+
+    /* ══ HERO STATS ══════════════════════════════════════ */
+    .hero-stats {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: flex-start;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-top: 1px solid var(--hairline-dark);
+    }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      padding: 28px 48px;
+      border-right: 1px solid var(--hairline-dark);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 54px;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--on-dark-mute);
+      letter-spacing: 0.1px;
+    }
+
     @media (max-width: 600px) {
       .hero-proof { font-size: 12px; gap: 10px; padding: 24px 24px 48px; }
       .proof-sep { display: none; }
@@ -520,7 +554,7 @@
       flex-shrink: 0;
     }
     .mission-list-dark li {
-      color: rgba(255,255,255,0.72);
+      color: var(--on-dark-mute);
       border-bottom-color: rgba(255,255,255,0.12);
     }
     .mission-list-dark li::before { background: var(--white); }
@@ -832,7 +866,7 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 22px;
       font-weight: 600;
-      color: rgba(255,255,255,0.88);
+      color: var(--on-dark-strong);
       margin-bottom: 16px;
       letter-spacing: -0.3px;
       transition: color 200ms ease;
@@ -905,7 +939,7 @@
       flex-wrap: wrap;
       gap: 16px;
     }
-    .footer-legal { font-size: 12px; color: rgba(255,255,255,0.60); line-height: 1.5; }
+    .footer-legal { font-size: 12px; color: var(--on-dark-legal); line-height: 1.5; }
 
     /* ══ RESPONSIVE ══════════════════════════════════════ */
 
@@ -1010,6 +1044,8 @@
     /* ══ CARD ICON COLOR ════════════════════════════════════ */
     .card-light .card-icon { color: var(--ink); }
     .card-light svg { color: var(--ink); }
+    .card-icon.dark-bg  { color: var(--on-dark-mute); }
+    .card-icon.navy-bg  { color: var(--white); }
 
     @media (max-width: 1024px) {
       .navbar { padding: 0 24px; }
@@ -1084,7 +1120,7 @@
 
   <!-- ══ HERO ════════════════════════════════════════════ -->
   <section id="hero">
-    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-bg" id="hero-bg" aria-hidden="true"></div>
     <div class="hero-inner">
       <div id="h-tag" class="tag-pill">Expert-comptable &amp; Commissariat aux comptes · Depuis 1979</div>
       <h1 class="hero-h1">
@@ -1222,7 +1258,7 @@
         <div class="card-featured" data-reveal style="--delay:160">
           <div class="badge-order">Inscrit à l'Ordre</div>
           <div class="card-icon navy-bg">
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
             </svg>
           </div>
@@ -1372,14 +1408,14 @@
         <div data-reveal style="--delay:120;display:flex;flex-direction:column;gap:16px">
           <div class="card-dark">
             <div class="card-icon dark-bg">
-              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
             </div>
             <div class="card-title-dark" style="font-size:17px">Analyse de votre situation</div>
             <div class="card-body-dark">Évaluation de vos processus actuels de facturation et identification des outils numériques les plus adaptés à votre entreprise.</div>
           </div>
           <div class="card-dark">
             <div class="card-icon dark-bg">
-              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
             <div class="card-title-dark" style="font-size:17px">Mise en œuvre sécurisée</div>
             <div class="card-body-dark">Accompagnement pas à pas pour sécuriser la démarche et accélérer votre transition numérique sans risque de rupture.</div>
@@ -1406,21 +1442,21 @@
       <div class="grid-3col">
         <div class="card-dark" data-reveal style="--delay:80">
           <div class="card-icon dark-bg">
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           </div>
           <div class="card-title-dark">Choix du statut</div>
           <div class="card-body-dark">BNC, BIC, SARL, SAS, entreprise individuelle, nous vous guidons vers la structure la plus adaptée à votre activité et votre situation personnelle.</div>
         </div>
         <div class="card-dark" data-reveal style="--delay:160">
           <div class="card-icon dark-bg">
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
           <div class="card-title-dark">Obligations fiscales</div>
           <div class="card-body-dark">TVA, franchise en base, IS, CFE, déclaration 2035, maîtrisez vos obligations dès le départ pour éviter les mauvaises surprises.</div>
         </div>
         <div class="card-dark" data-reveal style="--delay:240">
           <div class="card-icon dark-bg">
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
           <div class="card-title-dark">Accompagnement continu</div>
           <div class="card-body-dark">Un interlocuteur dédié de la création à la croissance, comptabilité, gestion, droit des affaires et conseil stratégique au quotidien.</div>
@@ -1489,7 +1525,7 @@
           <div class="contact-city">Meylan</div>
           <div class="contact-info-row">
             <div class="contact-info-icon">
-              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div class="contact-info-text">3 allée des Centaurées<br>38240 Meylan</div>
           </div>
@@ -1499,7 +1535,7 @@
           <div class="contact-city">Grenoble</div>
           <div class="contact-info-row">
             <div class="contact-info-icon">
-              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div class="contact-info-text">27 rue du Docteur Mazet<br>38000 Grenoble</div>
           </div>
@@ -1509,7 +1545,7 @@
           <div class="contact-city">Voiron</div>
           <div class="contact-info-row">
             <div class="contact-info-icon">
-              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div class="contact-info-text">44 avenue Jean-Jaurès<br>38500 Voiron</div>
           </div>
@@ -1687,7 +1723,6 @@
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    document.addEventListener('scroll', onScroll, { passive: true });
     requestAnimationFrame(frame);
 
     /* ── Hero entrance sequence ──────────────────────────── */
@@ -1770,7 +1805,16 @@
       a.addEventListener('click', closeMenu);
     });
     mobileMenu.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeMenu();
+      if (e.key === 'Escape') { closeMenu(); return; }
+      if (e.key !== 'Tab') return;
+      var focusable = Array.from(mobileMenu.querySelectorAll('a, button'));
+      var first = focusable[0];
+      var last  = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+      }
     });
   })();
   </script>
