@@ -5,10 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Expert-comptable à Meylan | Cabinet Yves &amp; Cyril Guillerme SEG</title>
   <meta name="description" content="Cabinet d'expertise comptable à Meylan. Yves & Cyril Guillerme, depuis 1979. Comptabilité, fiscal, audit, commissariat. Meylan, Grenoble, Voiron." />
+  <link rel="preload" as="font" href="assets/fonts/dm-sans.woff2" type="font/woff2" crossorigin />
+  <link rel="preload" as="font" href="assets/fonts/plus-jakarta-sans.woff2" type="font/woff2" crossorigin />
   <link rel="preload" as="image" href="uploads/hero-building.webp" fetchpriority="high" imagesrcset="uploads/hero-building.webp" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: 'DM Sans';
+      src: url('assets/fonts/dm-sans.woff2') format('woff2');
+      font-weight: 300 700;
+      font-style: normal italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Plus Jakarta Sans';
+      src: url('assets/fonts/plus-jakarta-sans.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
   <style>
     /* ══ RESET ═══════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -44,6 +59,23 @@
       /* easing */
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* white opacity scale */
+      --white-04: rgba(255,255,255,0.04);
+      --white-07: rgba(255,255,255,0.07);
+      --white-08: rgba(255,255,255,0.08);
+      --white-12: rgba(255,255,255,0.12);
+      --white-15: rgba(255,255,255,0.15);
+      --white-22: rgba(255,255,255,0.22);
+      --white-55: rgba(255,255,255,0.55);
+      --white-75: rgba(255,255,255,0.75);
+      --white-80: rgba(255,255,255,0.80);
+
+      /* shadow scale */
+      --shadow-btn:       0 1px 2px rgba(0,0,0,0.12);
+      --shadow-btn-hover: 0 2px 8px rgba(0,0,0,0.18);
+      --shadow-card:      0 8px 24px rgba(0,0,0,0.07);
+      --shadow-navy:      0 12px 32px rgba(27,61,143,0.30);
     }
 
     html { scroll-behavior: smooth; }
@@ -172,36 +204,36 @@
       background: transparent;
       transition: background 200ms ease;
     }
-    .btn:active::before { background: rgba(255,255,255,0.08); }
+    .btn:active::before { background: var(--white-08); }
 
     .btn-white {
       background: var(--white);
       color: var(--black);
-      box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+      box-shadow: var(--shadow-btn);
     }
     .btn-white:hover {
       background: var(--surface-hover-btn);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      box-shadow: var(--shadow-btn-hover);
     }
 
     .btn-outline-dark {
       background: transparent;
       color: var(--white);
-      border: 1px solid rgba(255,255,255,0.55);
+      border: 1px solid var(--white-55);
     }
     .btn-outline-dark:hover {
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(255,255,255,0.8);
+      background: var(--white-07);
+      border-color: var(--white-80);
     }
 
     .btn-dark {
       background: var(--black);
       color: var(--white);
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid var(--white-12);
     }
     .btn-dark:hover {
       background: var(--ink-hover);
-      border-color: rgba(255,255,255,0.22);
+      border-color: var(--white-22);
     }
 
     .btn-lg { height: 48px; padding: 0 28px; font-size: 16px; }
@@ -426,7 +458,7 @@
     .card-light:hover {
       border-color: var(--hairline-light-hov);
       transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+      box-shadow: var(--shadow-card);
     }
     .card-light:hover::before {
       opacity: 0.15;
@@ -479,14 +511,14 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(255,255,255,0);
+      background: transparent;
       transition: background 200ms ease;
     }
     .card-featured:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(27,61,143,0.30);
+      box-shadow: var(--shadow-navy);
     }
-    .card-featured:hover::after { background: rgba(255,255,255,0.04); }
+    .card-featured:hover::after { background: var(--white-04); }
     .card-featured:hover .card-icon { transform: scale(1.06); }
 
     /* ══ CARD ICON ═══════════════════════════════════════ */
@@ -502,8 +534,8 @@
       transition: transform 220ms var(--ease-out);
     }
     .card-icon.light-bg { background: var(--surface-soft); }
-    .card-icon.dark-bg  { background: rgba(255,255,255,0.10); }
-    .card-icon.navy-bg  { background: rgba(255,255,255,0.15); }
+    .card-icon.dark-bg  { background: var(--hairline-dark); }
+    .card-icon.navy-bg  { background: var(--white-15); }
     .card-icon svg { width: 22px; height: 22px; }
 
     .card-title-light {
@@ -556,7 +588,7 @@
     }
     .mission-list-dark li {
       color: var(--on-dark-mute);
-      border-bottom-color: rgba(255,255,255,0.12);
+      border-bottom-color: var(--white-12);
     }
     .mission-list-dark li::before { background: var(--white); }
     .chip {
@@ -573,7 +605,7 @@
 
     .badge-order {
       display: inline-flex;
-      background: rgba(255,255,255,0.15);
+      background: var(--white-15);
       color: var(--white);
       font-size: 12px;
       font-weight: 600;
@@ -642,7 +674,7 @@
 
     .photo-card-tag {
       display: inline-flex;
-      background: rgba(255,255,255,0.15);
+      background: var(--white-15);
       backdrop-filter: blur(8px);
       color: var(--white);
       font-size: 12px;
@@ -663,7 +695,7 @@
       margin-bottom: 10px;
       letter-spacing: -0.4px;
     }
-    .photo-card-desc { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+    .photo-card-desc { font-size: 14px; color: var(--white-75); line-height: 1.5; }
 
     .secteurs-right { display: flex; flex-direction: column; gap: 16px; }
     .photo-card-tall  { height: 440px; }
@@ -727,12 +759,12 @@
     .person-card:hover {
       border-color: var(--hairline-light-hov);
       transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      box-shadow: var(--shadow-card);
     }
     .person-card:hover::before { opacity: 0.5; transform: scaleX(1); }
     .person-card:hover .person-initials {
       transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(27,61,143,0.28);
+      box-shadow: var(--shadow-navy);
     }
 
     .person-initials {
@@ -1353,7 +1385,7 @@
       </div>
       <div class="secteurs-grid">
         <div class="photo-card photo-card-tall" data-reveal style="--delay:80">
-          <picture><source srcset="uploads/secteur-immobilier.webp" type="image/webp" /><img src="uploads/secteur-immobilier.jpg" alt="Immobilier" loading="lazy" width="900" height="600" /></picture>
+          <picture><source srcset="uploads/secteur-immobilier.webp" type="image/webp" /><img src="uploads/secteur-immobilier.jpg" alt="Immeuble résidentiel illustrant l'expertise du cabinet en immobilier et SCCV" loading="lazy" width="900" height="600" /></picture>
           <div class="photo-card-overlay"></div>
           <div class="photo-card-content">
             <div class="photo-card-tag">Immobilier &amp; SCCV</div>
@@ -1363,7 +1395,7 @@
         </div>
         <div class="secteurs-right">
           <div class="photo-card photo-card-short" data-reveal style="--delay:160">
-            <picture><source srcset="uploads/secteur-boulangeries.webp" type="image/webp" /><img src="uploads/secteur-boulangeries.jpg" alt="Boulangeries" loading="lazy" width="900" height="600" /></picture>
+            <picture><source srcset="uploads/secteur-boulangeries.webp" type="image/webp" /><img src="uploads/secteur-boulangeries.jpg" alt="Boulangerie artisanale, secteur d'expertise du cabinet avec plus de 50 dossiers suivis" loading="lazy" width="900" height="600" /></picture>
             <div class="photo-card-overlay"></div>
             <div class="photo-card-content">
               <div class="photo-card-tag">Boulangeries</div>
@@ -1372,7 +1404,7 @@
             </div>
           </div>
           <div class="photo-card photo-card-short" data-reveal style="--delay:240; flex:1">
-            <picture><source srcset="uploads/secteur-energie.webp" type="image/webp" /><img src="uploads/michael-myers-60ywI1Bx1M0-unsplash.jpg" alt="Activités pétrolières" loading="lazy" width="900" height="600" /></picture>
+            <picture><source srcset="uploads/secteur-energie.webp" type="image/webp" /><img src="uploads/michael-myers-60ywI1Bx1M0-unsplash.jpg" alt="Infrastructure pétrolière illustrant l'expertise du cabinet dans le secteur de l'énergie" loading="lazy" width="900" height="600" /></picture>
             <div class="photo-card-overlay"></div>
             <div class="photo-card-content">
               <div class="photo-card-tag">Énergie</div>
@@ -1415,7 +1447,7 @@
             </div>
           </div>
           <div class="office-photo">
-            <picture><source srcset="uploads/cabinet-bureau.webp" type="image/webp" /><img src="uploads/cabinet-bureau.jpg" alt="Bureau du cabinet" loading="lazy" width="900" height="600" /></picture>
+            <picture><source srcset="uploads/cabinet-bureau.webp" type="image/webp" /><img src="uploads/cabinet-bureau.jpg" alt="Bureau du cabinet Yves et Cyril Guillerme à Meylan" loading="lazy" width="900" height="600" /></picture>
           </div>
         </div>
       </div>

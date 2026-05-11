@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page introuvable | Cabinet Yves &amp; Cyril Guillerme SEG</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preload" as="font" href="assets/fonts/dm-sans.woff2" type="font/woff2" crossorigin />
+  <link rel="preload" as="font" href="assets/fonts/plus-jakarta-sans.woff2" type="font/woff2" crossorigin />
+  <style>
+    @font-face {
+      font-family: 'DM Sans';
+      src: url('assets/fonts/dm-sans.woff2') format('woff2');
+      font-weight: 300 700;
+      font-style: normal italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Plus Jakarta Sans';
+      src: url('assets/fonts/plus-jakarta-sans.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --ink:   #191c1f;
+      --mute:  #505a63;
+      --navy:  #1B3D8F;
+      --on-dark-mute: rgba(255,255,255,0.72);
+      --hairline-dark: rgba(255,255,255,0.10);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 64px;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--hairline-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+    }
+    .nav-logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.2px;
+    }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      height: 40px;
+      min-height: 44px;
+      padding: 0 20px;
+      background: var(--white);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: opacity 150ms ease;
+    }
+    .nav-cta:hover { opacity: 0.88; }
+
+    /* ── 404 content ── */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 48px;
+      text-align: center;
+    }
+    .error-inner { max-width: 560px; }
+
+    .error-code {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(96px, 20vw, 160px);
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--white);
+      opacity: 0.08;
+      margin-bottom: -24px;
+      user-select: none;
+    }
+
+    .error-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--on-dark-mute);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .error-tag::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: currentColor;
+      opacity: 0.5;
+    }
+
+    .error-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(32px, 6vw, 52px);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .error-body {
+      font-size: 17px;
+      color: var(--on-dark-mute);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .error-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      padding: 0 28px;
+      border-radius: 9999px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 140ms var(--ease-out), opacity 150ms ease;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-white { background: var(--white); color: var(--black); }
+    .btn-white:hover { opacity: 0.9; }
+    .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.30); }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.6); }
+
+    :focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--hairline-dark);
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .footer-legal {
+      font-size: 13px;
+      color: var(--on-dark-mute);
+    }
+    .footer-phone {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 150ms;
+    }
+    .footer-phone:hover { opacity: 1; }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .nav-cta { display: none; }
+      main { padding: 64px 24px; }
+      footer { flex-direction: column; align-items: flex-start; padding: 24px 24px; }
+      .error-actions { flex-direction: column; }
+      .error-actions .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav aria-label="Navigation principale">
+    <a href="/" class="nav-logo">Cabinet Yves &amp; Cyril Guillerme</a>
+    <a href="tel:+33476902010" class="nav-cta">04 76 90 20 10</a>
+  </nav>
+
+  <main>
+    <div class="error-inner">
+      <div class="error-code" aria-hidden="true">404</div>
+      <div class="error-tag">Page introuvable</div>
+      <h1 class="error-title">Cette page n'existe pas</h1>
+      <p class="error-body">L'adresse demandée est incorrecte ou la page a été déplacée. Revenez à l'accueil pour retrouver nos services.</p>
+      <div class="error-actions">
+        <a href="/" class="btn btn-white">Retour à l'accueil</a>
+        <a href="tel:+33476902010" class="btn btn-outline">Nous appeler</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-legal">© 2026 Cabinet Yves &amp; Cyril Guillerme SEG · Meylan · Grenoble · Voiron</div>
+    <a href="tel:+33476902010" class="footer-phone">04 76 90 20 10</a>
+  </footer>
+
+</body>
+</html>
