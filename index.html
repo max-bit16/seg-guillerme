@@ -165,8 +165,10 @@
       transform-origin: left;
       transition: transform 250ms var(--ease-out);
     }
-    .navbar-nav a:hover { color: var(--white); }
-    .navbar-nav a:hover::after { transform: scaleX(1); }
+    .navbar-nav a:hover,
+    .navbar-nav a.nav-active { color: var(--white); }
+    .navbar-nav a:hover::after,
+    .navbar-nav a.nav-active::after { transform: scaleX(1); }
 
     /* ══ BUTTONS ═════════════════════════════════════════ */
     .btn {
@@ -194,7 +196,7 @@
                   opacity 180ms ease,
                   box-shadow 180ms ease;
     }
-    .btn:active { transform: scale(0.965); }
+    .btn:active { transform: scale(0.965) translateY(1px); }
 
     /* Ripple */
     .btn::before {
@@ -893,9 +895,21 @@
       margin-top: 20px;
       text-decoration: none;
       letter-spacing: 0.2px;
-      transition: opacity 150ms ease;
+      position: relative;
+      transition: color 180ms ease, transform 200ms var(--ease-out);
     }
-    .contact-phone:hover { opacity: 0.7; }
+    .contact-phone::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 1px;
+      background: var(--white);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 240ms var(--ease-out);
+    }
+    .contact-phone:hover { transform: translateY(-1px); }
+    .contact-phone:hover::after { transform: scaleX(1); }
 
     /* ══ FOOTER ══════════════════════════════════════════ */
     footer {
@@ -924,9 +938,10 @@
       font-size: 13px;
       color: var(--on-dark-mute);
       text-decoration: none;
-      transition: color 180ms ease;
+      transition: color 180ms ease, transform 200ms var(--ease-out);
+      display: inline-block;
     }
-    .footer-links a:hover { color: var(--white); }
+    .footer-links a:hover { color: var(--white); transform: translateX(4px); }
     .footer-bottom {
       border-top: 1px solid var(--hairline-dark);
       padding-top: 32px;
@@ -1140,6 +1155,15 @@
     body:not(.has-cursor) .cursor-ring { display: none; }
     body.cursor-hover .cursor-ring { width: 64px; height: 64px; opacity: 0.3; }
     body.cursor-active .cursor-dot { transform: scale(0.5); }
+
+    /* ── Recrutement panels ───────────────────────────────── */
+    .recrutement-panel {
+      transition: box-shadow 200ms ease, transform 240ms var(--ease-out);
+    }
+    .recrutement-panel:hover {
+      box-shadow: inset 0 0 0 1px var(--white-22);
+      transform: translateX(6px);
+    }
 
     /* ── Split-text hero words ────────────────────────────── */
     .h-word { display: inline-block; }
@@ -1585,16 +1609,16 @@
         </div>
 
         <!-- Colonne panneaux -->
-        <div data-reveal style="--delay:150;display:flex;flex-direction:column;gap:12px">
-          <div style="background:var(--surface-elevated);border:1px solid var(--hairline-dark);border-radius:16px;padding:24px 28px">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="recrutement-panel" data-reveal style="--delay:150;background:var(--surface-elevated);border:1px solid var(--hairline-dark);border-radius:16px;padding:24px 28px">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px">Stage &amp; alternance</div>
             <div style="font-size:14px;color:var(--on-dark-mute);line-height:1.5">Missions encadrées, immersion terrain, encadrement par des associés expérimentés.</div>
           </div>
-          <div style="background:var(--surface-elevated);border:1px solid var(--hairline-dark);border-radius:16px;padding:24px 28px">
+          <div class="recrutement-panel" data-reveal style="--delay:240;background:var(--surface-elevated);border:1px solid var(--hairline-dark);border-radius:16px;padding:24px 28px">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px">Emploi CDI</div>
             <div style="font-size:14px;color:var(--on-dark-mute);line-height:1.5">Collaborateur comptable, gestionnaire de paie, auditeur. Postes ouverts à Meylan, Grenoble et Voiron.</div>
           </div>
-          <div style="background:var(--surface-elevated);border:1px solid var(--hairline-dark);border-radius:16px;padding:24px 28px">
+          <div class="recrutement-panel" data-reveal style="--delay:330;background:var(--surface-elevated);border:1px solid var(--hairline-dark);border-radius:16px;padding:24px 28px">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px">Cabinet à taille humaine</div>
             <div style="font-size:14px;color:var(--on-dark-mute);line-height:1.5">20 collaborateurs, 3 agences, une expertise sectorielle rare et un environnement de travail exigeant.</div>
           </div>
@@ -1873,6 +1897,20 @@
     setTimeout(scanReveal, 100);
     setTimeout(scanReveal, 500);
 
+    /* ── Mobile CTA entrance ─────────────────────────────── */
+    var mobileCta = document.querySelector('.mobile-cta-bar');
+    if (mobileCta && !reduced) {
+      mobileCta.style.transform = 'translateY(100%)';
+      mobileCta.style.transition = 'transform 480ms cubic-bezier(0.22,1,0.36,1)';
+      setTimeout(function () { mobileCta.style.transform = 'translateY(0)'; }, 1100);
+    }
+
+    /* ── Developer easter egg ─────────────────────────────── */
+    if (window.console && console.log) {
+      console.log('%c Cabinet Guillerme SEG ', 'background:#1B3D8F;color:#fff;font-size:14px;font-weight:600;padding:6px 12px;border-radius:4px;font-family:sans-serif');
+      console.log('%c Vous inspectez notre code ? Nous recrutons des talents curieux.\n contact@cabinet-guillerme.fr ', 'color:#505a63;font-size:12px;font-family:sans-serif');
+    }
+
   })();
   </script>
 
@@ -1989,11 +2027,14 @@
     /* ── Spring hover on all card types ────────────────────── */
     var CARDS = '.card-light,.card-dark,.card-featured,.card-dark-secteur,.contact-card,.person-card';
     document.querySelectorAll(CARDS).forEach(function (card) {
+      var icon = card.querySelector('.card-icon svg');
       card.addEventListener('mouseenter', function () {
         gsap.to(card, { y: -7, duration: 0.42, ease: 'power3.out', overwrite: 'auto' });
+        if (icon) gsap.to(icon, { scale: 1.18, rotate: -6, duration: 0.38, ease: 'power3.out', overwrite: 'auto' });
       });
       card.addEventListener('mouseleave', function () {
         gsap.to(card, { y: 0,  duration: 0.58, ease: 'power3.out', overwrite: 'auto' });
+        if (icon) gsap.to(icon, { scale: 1, rotate: 0, duration: 0.55, ease: 'power3.out', overwrite: 'auto' });
       });
     });
 
@@ -2003,6 +2044,34 @@
         scrollTrigger: { trigger: card, start: 'top 88%', once: true },
         opacity: 0, y: 50, duration: 0.85, ease: 'power3.out'
       });
+    });
+
+    /* ── Navbar entrance ────────────────────────────────────── */
+    var navbarEl = document.getElementById('navbar');
+    if (navbarEl) {
+      gsap.from(navbarEl, { opacity: 0, y: -14, duration: 0.55, ease: 'power3.out', delay: 0.1 });
+    }
+
+    /* ── Active section tracking ─────────────────────────── */
+    var sectionIds = ['hero','missions','secteurs','cabinet','evaluation','facture-electronique','creation','recrutement','contact'];
+    var navLinks = {};
+    sectionIds.forEach(function (id) {
+      var link = document.querySelector('.navbar-nav a[href="#' + id + '"]');
+      if (link) navLinks[id] = link;
+    });
+
+    var sectionObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var id = entry.target.id;
+        Object.values(navLinks).forEach(function (l) { l.classList.remove('nav-active'); });
+        if (navLinks[id]) navLinks[id].classList.add('nav-active');
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+    sectionIds.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) sectionObserver.observe(el);
     });
 
     /* ── Refresh after assets load ─────────────────────────── */
