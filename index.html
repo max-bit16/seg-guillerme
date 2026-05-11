@@ -1002,7 +1002,7 @@
     #mobile-menu {
       position: fixed;
       inset: 0;
-      z-index: 200;
+      z-index: 300;
       background: var(--black);
       display: flex;
       flex-direction: column;
@@ -1094,7 +1094,10 @@
       .stat-item:not(:last-child) { border-right: none; border-bottom: 1px solid var(--hairline-dark); }
       .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
       .secteurs-header { margin-bottom: 40px; }
-      .photo-card-tall { height: 260px; }
+      .photo-card-tall { height: 300px; }
+      .photo-card-content { padding: 24px; }
+      .photo-card-title { font-size: 19px; }
+      .photo-card-desc { display: none; }
       #missions, #secteurs, #cabinet, #contact { padding: 64px 0; }
       #evaluation, #facture-electronique, #creation { padding: 64px 0 !important; }
       #recrutement { min-height: 400px !important; }
@@ -1117,7 +1120,10 @@
       .stat-number { font-size: 38px; }
       .stat-item { padding: 14px 20px; }
       .section-h2 { font-size: clamp(28px, 8.5vw, 36px); }
-      .photo-card-tall { height: 220px; }
+      .photo-card-tall { height: 260px; }
+      .photo-card-short { height: 180px; }
+      .photo-card-content { padding: 20px; }
+      .photo-card-title { font-size: 17px; }
       #mobile-menu { padding: 72px 24px 40px; }
       #missions, #secteurs, #cabinet, #contact { padding: 56px 0; }
       #evaluation, #facture-electronique, #creation { padding: 56px 0 !important; }
@@ -1224,19 +1230,21 @@
       <span class="ham-bar"></span>
       <span class="ham-bar"></span>
     </button>
-    <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu de navigation" hidden>
-      <button class="mobile-menu-close" aria-label="Fermer le menu">✕</button>
-      <nav aria-label="Menu mobile">
-        <a href="#missions">Nos missions</a>
-        <a href="#secteurs">Secteurs</a>
-        <a href="#cabinet">Le cabinet</a>
-        <a href="#evaluation">Évaluation</a>
-        <a href="#creation">Création</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <a href="tel:+33476902010" class="btn btn-white" style="margin-top:32px">04 76 90 20 10</a>
-    </div>
   </nav>
+
+  <!-- ══ MOBILE MENU (sibling of navbar, owns its z-index) ══ -->
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu de navigation" hidden>
+    <button class="mobile-menu-close" aria-label="Fermer le menu">✕</button>
+    <nav aria-label="Menu mobile">
+      <a href="#missions">Nos missions</a>
+      <a href="#secteurs">Secteurs</a>
+      <a href="#cabinet">Le cabinet</a>
+      <a href="#evaluation">Évaluation</a>
+      <a href="#creation">Création</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="tel:+33476902010" class="btn btn-white" style="margin-top:32px">04 76 90 20 10</a>
+  </div>
 
   <main id="main-content">
 
