@@ -964,7 +964,9 @@
       color: var(--on-dark-mute);
       text-decoration: none;
       transition: color 180ms ease, transform 200ms var(--ease-out);
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      min-height: 44px;
     }
     .footer-links a:hover { color: var(--white); transform: translateX(4px); }
     .footer-bottom {
@@ -1071,6 +1073,10 @@
     /* ══ GRILLES CSS ═════════════════════════════════════════ */
     .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
     .grid-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+    /* ══ SECTION SPACING ════════════════════════════════════ */
+    .section-padded { padding: 100px 0; }
+    @media (max-width: 768px) { .section-padded { padding: 64px 0; } }
 
     /* ══ FOCUS VISIBLE ══════════════════════════════════════ */
     :focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
@@ -1291,17 +1297,17 @@
     </div>
     <hr class="hero-divider" />
     <div class="hero-stats">
-      <div class="stat-item" id="stat-0">
-        <span class="stat-number" data-count="1979" data-display="1979">1979</span>
-        <span class="stat-label">Année de création</span>
+      <div class="stat-item" id="stat-0" aria-label="Fondé en 1979">
+        <span class="stat-number" data-count="1979" data-display="1979" aria-hidden="true">1979</span>
+        <span class="stat-label" aria-hidden="true">Année de création</span>
       </div>
-      <div class="stat-item" id="stat-1">
-        <span class="stat-number" data-count="3" data-display="3 agences">3 agences</span>
-        <span class="stat-label">Meylan · Grenoble · Voiron</span>
+      <div class="stat-item" id="stat-1" aria-label="3 agences : Meylan, Grenoble, Voiron">
+        <span class="stat-number" data-count="3" data-display="3 agences" aria-hidden="true">3 agences</span>
+        <span class="stat-label" aria-hidden="true">Meylan · Grenoble · Voiron</span>
       </div>
-      <div class="stat-item" id="stat-2">
-        <span class="stat-number" data-count="20" data-display="20">20</span>
-        <span class="stat-label">Collaborateurs</span>
+      <div class="stat-item" id="stat-2" aria-label="20 collaborateurs">
+        <span class="stat-number" data-count="20" data-display="20" aria-hidden="true">20</span>
+        <span class="stat-label" aria-hidden="true">Collaborateurs</span>
       </div>
     </div>
   </section>
@@ -1514,7 +1520,7 @@
   <div class="band-line" data-bandline aria-hidden="true"></div>
 
   <!-- ══ ÉVALUATION D'ENTREPRISE ════════════════════════ -->
-  <section id="evaluation" style="background:var(--white);padding:100px 0">
+  <section id="evaluation" class="section-padded" style="background:var(--white)">
     <div class="container">
       <div class="grid-2col" style="align-items:start">
         <div data-reveal>
@@ -1551,7 +1557,7 @@
   <div class="band-line" data-bandline aria-hidden="true"></div>
 
   <!-- ══ FACTURE ÉLECTRONIQUE ════════════════════════════ -->
-  <section id="facture-electronique" style="background:var(--black);padding:100px 0">
+  <section id="facture-electronique" class="section-padded" style="background:var(--black)">
     <div class="container">
       <div class="grid-2col" style="align-items:center">
         <div data-reveal>
@@ -1584,7 +1590,7 @@
   <div class="band-line" data-bandline aria-hidden="true"></div>
 
   <!-- ══ CRÉATION D'ENTREPRISE ══════════════════════════ -->
-  <section id="creation" style="background:var(--black);padding:100px 0;position:relative;overflow:hidden">
+  <section id="creation" class="section-padded" style="background:var(--black);position:relative;overflow:hidden">
     <!-- Photo de fond -->
     <div style="position:absolute;inset:0;background-image:image-set(url('uploads/creation-bg.webp') type('image/webp'),url('uploads/creation-bg.jpg') type('image/jpeg'));background-size:cover;background-position:center 40%;opacity:0.28;transform:scale(1.05)"></div>
     <!-- Gradient de renforcement -->

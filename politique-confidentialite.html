@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Politique de confidentialité | Cabinet Yves &amp; Cyril Guillerme SEG</title>
+  <meta name="description" content="Politique de confidentialité et de protection des données personnelles du Cabinet Yves et Cyril Guillerme SEG." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://seg-guillerme.vercel.app/politique-confidentialite.html" />
+  <link rel="preload" as="font" href="assets/fonts/dm-sans.woff2" type="font/woff2" crossorigin />
+  <link rel="preload" as="font" href="assets/fonts/plus-jakarta-sans.woff2" type="font/woff2" crossorigin />
+  <style>
+    @font-face {
+      font-family: 'DM Sans';
+      src: url('assets/fonts/dm-sans.woff2') format('woff2');
+      font-weight: 300 700;
+      font-style: normal italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Plus Jakarta Sans';
+      src: url('assets/fonts/plus-jakarta-sans.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:          #000000;
+      --white:          #ffffff;
+      --navy:           #1B3D8F;
+      --on-dark-mute:   rgba(255,255,255,0.72);
+      --on-dark-subtle: rgba(255,255,255,0.45);
+      --hairline-dark:  rgba(255,255,255,0.10);
+      --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 64px;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--hairline-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+    }
+    .nav-logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.2px;
+    }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      height: 40px;
+      min-height: 44px;
+      padding: 0 20px;
+      background: var(--white);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: opacity 150ms ease;
+    }
+    .nav-cta:hover { opacity: 0.88; }
+
+    /* ── Content ── */
+    main { flex: 1; padding-top: 64px; }
+    .legal-content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 48px 100px;
+    }
+    .legal-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--on-dark-subtle);
+      margin-bottom: 20px;
+    }
+    .legal-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .legal-date { font-size: 13px; color: var(--on-dark-subtle); margin-bottom: 64px; }
+    .legal-section { margin-bottom: 48px; }
+    .legal-h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--hairline-dark);
+    }
+    .legal-p {
+      font-size: 15px;
+      color: var(--on-dark-mute);
+      line-height: 1.75;
+      margin-bottom: 10px;
+    }
+    .legal-p:last-child { margin-bottom: 0; }
+    .legal-p strong { color: var(--white); font-weight: 600; }
+    .legal-p a { color: var(--white); text-underline-offset: 3px; }
+    .legal-p a:hover { opacity: 0.8; }
+    .legal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 4px;
+      font-size: 14px;
+    }
+    .legal-table th {
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--on-dark-subtle);
+      padding: 8px 16px 8px 0;
+      border-bottom: 1px solid var(--hairline-dark);
+    }
+    .legal-table td {
+      padding: 12px 16px 12px 0;
+      color: var(--on-dark-mute);
+      line-height: 1.5;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .legal-table td:first-child { color: var(--white); font-weight: 500; width: 38%; }
+    .legal-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--on-dark-mute);
+      text-decoration: none;
+      margin-bottom: 48px;
+      transition: color 150ms ease;
+    }
+    .legal-back:hover { color: var(--white); }
+    .legal-back svg { transition: transform 150ms var(--ease-out); }
+    .legal-back:hover svg { transform: translateX(-3px); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--hairline-dark);
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .footer-legal { font-size: 13px; color: var(--on-dark-mute); }
+    .footer-legal a { color: inherit; text-underline-offset: 3px; }
+    .footer-phone {
+      font-size: 14px; font-weight: 600; color: var(--white);
+      text-decoration: none; opacity: 0.8; transition: opacity 150ms;
+    }
+    .footer-phone:hover { opacity: 1; }
+
+    :focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-cta { display: none; }
+      .legal-content { padding: 56px 24px 80px; }
+      footer { flex-direction: column; align-items: flex-start; padding: 24px; }
+      .legal-table th, .legal-table td { padding-right: 8px; }
+      .legal-table td:first-child { width: 44%; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" style="position:absolute;left:-9999px;top:0;z-index:999;background:var(--navy);color:#fff;padding:8px 16px;font-size:14px;font-weight:600;text-decoration:none" onfocus="this.style.left='0'">Aller au contenu principal</a>
+
+  <nav aria-label="Navigation principale">
+    <a href="/" class="nav-logo">Cabinet Yves &amp; Cyril Guillerme</a>
+    <a href="tel:+33476902010" class="nav-cta">04 76 90 20 10</a>
+  </nav>
+
+  <main id="main-content">
+    <div class="legal-content">
+
+      <a href="/" class="legal-back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        Retour à l'accueil
+      </a>
+
+      <div class="legal-eyebrow">RGPD</div>
+      <h1 class="legal-title">Politique de confidentialité</h1>
+      <p class="legal-date">Dernière mise à jour : janvier 2026</p>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">1. Responsable du traitement</h2>
+        <p class="legal-p"><strong>Cabinet Yves &amp; Cyril Guillerme SEG</strong><br>
+          3 allée des Centaurées, 38240 Meylan<br>
+          <a href="mailto:contact@cabinet-guillerme.fr">contact@cabinet-guillerme.fr</a> — <a href="tel:+33476902010">04 76 90 20 10</a>
+        </p>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">2. Données collectées</h2>
+        <p class="legal-p">Ce site vitrine ne comporte pas de formulaire de contact. Aucune donnée personnelle n'est collectée activement lors de votre navigation.</p>
+        <p class="legal-p">Les journaux techniques de l'hébergeur (Vercel Inc.) enregistrent automatiquement des données de connexion : adresse IP, type de navigateur, pages consultées, horodatage. Ces données sont nécessaires au fonctionnement et à la sécurité du service d'hébergement.</p>
+        <p class="legal-p">Si vous nous contactez par e-mail ou par téléphone, les informations que vous communiquez (nom, coordonnées, objet de votre demande) sont traitées exclusivement dans le cadre du suivi de votre demande.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">3. Finalités et bases légales</h2>
+        <table class="legal-table" aria-label="Finalités de traitement">
+          <thead>
+            <tr>
+              <th scope="col">Traitement</th>
+              <th scope="col">Base légale</th>
+              <th scope="col">Durée de conservation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Journaux techniques serveur (hébergeur)</td>
+              <td>Intérêt légitime (sécurité et disponibilité du service)</td>
+              <td>90 jours</td>
+            </tr>
+            <tr>
+              <td>Demandes de contact (e-mail, téléphone)</td>
+              <td>Mesures précontractuelles ou exécution d'un contrat (art. 6-1-b RGPD)</td>
+              <td>3 ans à compter du dernier contact</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">4. Destinataires des données</h2>
+        <p class="legal-p"><strong>Vercel Inc.</strong> (hébergeur) — agit en qualité de sous-traitant au sens de l'article 28 du RGPD. Vercel est certifié dans le cadre du Data Privacy Framework UE-États-Unis.</p>
+        <p class="legal-p">Aucune donnée n'est vendue, louée ou cédée à des tiers à des fins commerciales.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">5. Transferts hors Union européenne</h2>
+        <p class="legal-p">Vercel Inc. est établie aux États-Unis. Les transferts de données vers ce pays sont encadrés par le Data Privacy Framework EU-États-Unis (décision d'adéquation de la Commission européenne du 10 juillet 2023) et par des clauses contractuelles types.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">6. Vos droits</h2>
+        <p class="legal-p">Conformément au RGPD et à la loi Informatique et Libertés, vous disposez des droits suivants :</p>
+        <p class="legal-p">
+          <strong>Droit d'accès</strong> — obtenir la confirmation que des données vous concernant sont traitées, et en obtenir une copie.<br>
+          <strong>Droit de rectification</strong> — faire corriger des données inexactes ou incomplètes.<br>
+          <strong>Droit à l'effacement</strong> — demander la suppression de vos données dans les cas prévus par la loi.<br>
+          <strong>Droit à la portabilité</strong> — recevoir vos données dans un format structuré et lisible.<br>
+          <strong>Droit à la limitation</strong> — restreindre temporairement le traitement de vos données.<br>
+          <strong>Droit d'opposition</strong> — vous opposer à un traitement fondé sur l'intérêt légitime.
+        </p>
+        <p class="legal-p">Pour exercer vos droits, adressez votre demande à : <a href="mailto:contact@cabinet-guillerme.fr">contact@cabinet-guillerme.fr</a> ou par courrier à l'adresse du siège social. Nous répondrons dans un délai d'un mois.</p>
+        <p class="legal-p">Vous avez également le droit d'introduire une réclamation auprès de la <strong>CNIL</strong> : <a href="https://www.cnil.fr" rel="noopener noreferrer" target="_blank">www.cnil.fr</a>.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">7. Cookies</h2>
+        <p class="legal-p">Ce site n'utilise pas de cookies analytiques, publicitaires ou de traçage. Aucun cookie n'est déposé sur votre terminal lors de votre navigation.</p>
+        <p class="legal-p">Le chargement de la bibliothèque d'animation GSAP depuis le réseau de distribution jsDelivr (<a href="https://www.jsdelivr.com" rel="noopener noreferrer" target="_blank">cdn.jsdelivr.net</a>) peut entraîner l'enregistrement de votre adresse IP par ce service tiers, dans le cadre normal du fonctionnement d'un CDN.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">8. Sécurité</h2>
+        <p class="legal-p">Ce site est servi exclusivement via HTTPS avec HSTS (Strict-Transport-Security). Des en-têtes de sécurité HTTP (Content-Security-Policy, X-Frame-Options, etc.) sont en place pour protéger les utilisateurs contre les attaques courantes.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">9. Modifications</h2>
+        <p class="legal-p">Cette politique peut être mise à jour à tout moment. La date de dernière mise à jour est indiquée en haut de page. Nous vous encourageons à la consulter régulièrement.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-legal">© 2026 Cabinet Yves &amp; Cyril Guillerme SEG · <a href="mentions-legales.html">Mentions légales</a> · <a href="politique-confidentialite.html" aria-current="page">Politique de confidentialité</a></div>
+    <a href="tel:+33476902010" class="footer-phone">04 76 90 20 10</a>
+  </footer>
+
+</body>
+</html>

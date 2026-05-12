@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mentions légales | Cabinet Yves &amp; Cyril Guillerme SEG</title>
+  <meta name="description" content="Mentions légales du Cabinet Yves et Cyril Guillerme SEG — Expert-comptable &amp; Commissaires aux comptes à Meylan, Grenoble et Voiron." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://seg-guillerme.vercel.app/mentions-legales.html" />
+  <link rel="preload" as="font" href="assets/fonts/dm-sans.woff2" type="font/woff2" crossorigin />
+  <link rel="preload" as="font" href="assets/fonts/plus-jakarta-sans.woff2" type="font/woff2" crossorigin />
+  <style>
+    @font-face {
+      font-family: 'DM Sans';
+      src: url('assets/fonts/dm-sans.woff2') format('woff2');
+      font-weight: 300 700;
+      font-style: normal italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Plus Jakarta Sans';
+      src: url('assets/fonts/plus-jakarta-sans.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:         #000000;
+      --white:         #ffffff;
+      --navy:          #1B3D8F;
+      --on-dark-mute:  rgba(255,255,255,0.72);
+      --on-dark-subtle: rgba(255,255,255,0.45);
+      --hairline-dark: rgba(255,255,255,0.10);
+      --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 64px;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--hairline-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+    }
+    .nav-logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.2px;
+    }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      height: 40px;
+      min-height: 44px;
+      padding: 0 20px;
+      background: var(--white);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: opacity 150ms ease;
+    }
+    .nav-cta:hover { opacity: 0.88; }
+
+    /* ── Content ── */
+    main {
+      flex: 1;
+      padding-top: 64px;
+    }
+    .legal-content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 48px 100px;
+    }
+    .legal-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--on-dark-subtle);
+      margin-bottom: 20px;
+    }
+    .legal-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .legal-date {
+      font-size: 13px;
+      color: var(--on-dark-subtle);
+      margin-bottom: 64px;
+    }
+    .legal-section { margin-bottom: 48px; }
+    .legal-h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--hairline-dark);
+    }
+    .legal-p {
+      font-size: 15px;
+      color: var(--on-dark-mute);
+      line-height: 1.75;
+      margin-bottom: 10px;
+    }
+    .legal-p:last-child { margin-bottom: 0; }
+    .legal-p strong { color: var(--white); font-weight: 600; }
+    .legal-p a { color: var(--white); text-underline-offset: 3px; }
+    .legal-p a:hover { opacity: 0.8; }
+    .legal-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--on-dark-mute);
+      text-decoration: none;
+      margin-bottom: 48px;
+      transition: color 150ms ease;
+    }
+    .legal-back:hover { color: var(--white); }
+    .legal-back svg { transition: transform 150ms var(--ease-out); }
+    .legal-back:hover svg { transform: translateX(-3px); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--hairline-dark);
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .footer-legal {
+      font-size: 13px;
+      color: var(--on-dark-mute);
+    }
+    .footer-legal a { color: inherit; text-underline-offset: 3px; }
+    .footer-phone {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 150ms;
+    }
+    .footer-phone:hover { opacity: 1; }
+
+    :focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-cta { display: none; }
+      .legal-content { padding: 56px 24px 80px; }
+      footer { flex-direction: column; align-items: flex-start; padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" style="position:absolute;left:-9999px;top:0;z-index:999;background:var(--navy);color:#fff;padding:8px 16px;font-size:14px;font-weight:600;text-decoration:none" class="sr-only" onfocus="this.style.left='0'">Aller au contenu principal</a>
+
+  <nav aria-label="Navigation principale">
+    <a href="/" class="nav-logo">Cabinet Yves &amp; Cyril Guillerme</a>
+    <a href="tel:+33476902010" class="nav-cta">04 76 90 20 10</a>
+  </nav>
+
+  <main id="main-content">
+    <div class="legal-content">
+
+      <a href="/" class="legal-back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        Retour à l'accueil
+      </a>
+
+      <div class="legal-eyebrow">Informations légales</div>
+      <h1 class="legal-title">Mentions légales</h1>
+      <p class="legal-date">Dernière mise à jour : janvier 2026</p>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">1. Éditeur du site</h2>
+        <p class="legal-p"><strong>Raison sociale :</strong> Cabinet Yves &amp; Cyril Guillerme SEG</p>
+        <p class="legal-p"><strong>Forme juridique :</strong> Société d'expertise comptable</p>
+        <p class="legal-p"><strong>SIRET :</strong> 315 280 297 00021 — <strong>APE :</strong> 6920Z</p>
+        <p class="legal-p"><strong>Inscription professionnelle :</strong> Inscrit à l'Ordre des experts-comptables, Compagnie Régionale Auvergne-Rhône-Alpes. Commissaires aux comptes inscrits auprès de la Compagnie Nationale des Commissaires aux Comptes.</p>
+        <p class="legal-p"><strong>Siège social :</strong> 3 allée des Centaurées, 38240 Meylan</p>
+        <p class="legal-p"><strong>Autres agences :</strong> 27 rue du Docteur Mazet, 38000 Grenoble · 44 avenue Jean-Jaurès, 38500 Voiron</p>
+        <p class="legal-p"><strong>Téléphone :</strong> <a href="tel:+33476902010">04 76 90 20 10</a></p>
+        <p class="legal-p"><strong>Email :</strong> <a href="mailto:contact@cabinet-guillerme.fr">contact@cabinet-guillerme.fr</a></p>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">2. Directeur de la publication</h2>
+        <p class="legal-p">M. Cyril Guillerme, Expert-comptable associé — Cabinet Yves &amp; Cyril Guillerme SEG.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">3. Hébergement</h2>
+        <p class="legal-p"><strong>Hébergeur :</strong> Vercel Inc.</p>
+        <p class="legal-p">340 Pine Street, Suite 701, San Francisco, CA 94104, États-Unis</p>
+        <p class="legal-p"><a href="https://vercel.com" rel="noopener noreferrer" target="_blank">https://vercel.com</a></p>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">4. Propriété intellectuelle</h2>
+        <p class="legal-p">L'ensemble des éléments composant ce site (textes, visuels, structure, code source) est protégé par le droit de la propriété intellectuelle et appartient au Cabinet Yves &amp; Cyril Guillerme SEG ou à ses ayants droit.</p>
+        <p class="legal-p">Toute reproduction, représentation, modification ou exploitation, totale ou partielle, sans autorisation écrite préalable est interdite et constituerait une contrefaçon sanctionnée par les articles L. 335-2 et suivants du Code de la propriété intellectuelle.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">5. Protection des données personnelles</h2>
+        <p class="legal-p">Ce site ne collecte aucune donnée personnelle via des formulaires. Les journaux techniques du serveur (adresse IP, navigateur, pages visitées) sont enregistrés par l'hébergeur Vercel dans le cadre normal du fonctionnement des services d'hébergement.</p>
+        <p class="legal-p">Conformément au Règlement (UE) 2016/679 (RGPD) et à la loi Informatique et Libertés modifiée, vous disposez de droits d'accès, de rectification, d'effacement, de portabilité, de limitation et d'opposition concernant vos données.</p>
+        <p class="legal-p">Pour exercer ces droits ou pour toute question relative au traitement de vos données, contactez-nous à l'adresse : <a href="mailto:contact@cabinet-guillerme.fr">contact@cabinet-guillerme.fr</a> ou par courrier à l'adresse du siège social.</p>
+        <p class="legal-p">Pour en savoir plus, consultez notre <a href="politique-confidentialite.html">Politique de confidentialité</a>.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">6. Cookies</h2>
+        <p class="legal-p">Ce site n'utilise pas de cookies analytiques ou publicitaires. Aucun cookie n'est déposé sur votre terminal lors de votre navigation. Seuls les journaux techniques de l'hébergeur (Vercel) sont enregistrés.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">7. Liens hypertextes</h2>
+        <p class="legal-p">Ce site peut contenir des liens vers des sites tiers. Le Cabinet Yves &amp; Cyril Guillerme SEG n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu ou leur disponibilité.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">8. Limitation de responsabilité</h2>
+        <p class="legal-p">Les informations publiées sur ce site ont un caractère général et informatif. Elles ne constituent pas un conseil juridique, fiscal ou comptable personnalisé et ne sauraient engager la responsabilité du cabinet.</p>
+        <p class="legal-p">Le cabinet ne saurait être tenu responsable d'une indisponibilité du site, de virus ou de tout préjudice résultant d'un usage frauduleux ou d'une mauvaise utilisation du site.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2 class="legal-h2">9. Droit applicable — Juridiction compétente</h2>
+        <p class="legal-p">Les présentes mentions légales sont soumises au droit français. En cas de litige, les tribunaux du ressort de la Cour d'appel de Grenoble sont compétents.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-legal">© 2026 Cabinet Yves &amp; Cyril Guillerme SEG · <a href="mentions-legales.html" aria-current="page">Mentions légales</a> · <a href="politique-confidentialite.html">Politique de confidentialité</a></div>
+    <a href="tel:+33476902010" class="footer-phone">04 76 90 20 10</a>
+  </footer>
+
+</body>
+</html>
