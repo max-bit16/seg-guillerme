@@ -1,0 +1,5 @@
+Contact: mailto:contact@seg-guillerme.fr
+Preferred-Languages: fr, en
+Canonical: https://seg-guillerme.vercel.app/.well-known/security.txt
+Policy: https://seg-guillerme.vercel.app/mentions-legales
+Expires: 2027-01-01T00:00:00.000Z
